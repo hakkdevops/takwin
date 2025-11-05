@@ -1,0 +1,22 @@
+[project]
+name = "math_project"
+version = "1.0.0"
+
+[build]
+compiler = "gcc"
+optimization = "O2"
+output_dir = "build"
+include_paths = ["include"]
+
+[[targets]]
+name = "mathlib"
+type = "static_library"
+sources = ["src/math_utils.cpp"]
+output = "math"
+
+[[targets]]
+name = "calculator"
+type = "executable"
+sources = ["src/main.cpp"]
+libraries = ["math"]
+library_paths = ["build/lib"]

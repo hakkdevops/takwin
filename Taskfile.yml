@@ -1,0 +1,96 @@
+version: '3'
+
+vars:
+  BINARY_NAME: takwin
+  COVERAGE_FILE: coverage.out
+
+tasks:
+  default:
+    desc: Run default tasks
+    cmds:
+      - task: test
+
+  # Development tasks
+  fmt:
+    desc: Format code
+    cmds:
+      - go fmt ./...
+
+  lint:
+    desc: Run linter
+    cmds:
+      - golangci-lint run
+
+  vet:
+    desc: Run go vet
+    cmds:
+      - go vet ./...
+
+  test:
+    desc: Run tests
+    cmds:
+      - go test ./...
+
+  test-race:
+    desc: Run tests with race detection
+    cmds:
+      - go test -race ./...
+
+  test-coverage:
+    desc: Run tests with coverage
+    cmds:
+      - go test -coverprofile={{.COVERAGE_FILE}} ./...
+      - go tool cover -html={{.COVERAGE_FILE}} -o coverage.html
+
+  # Build tasks
+  build:
+    desc: Build binary
+    cmds:
+      - go build -o {{.BINARY_NAME}} main.go
+
+  build-all:
+    desc: Build for all platforms
+    cmds:
+      - GOOS=linux GOARCH=amd64 go build -o {{.BINARY_NAME}}-linux main.go
+      - GOOS=windows GOARCH=amd64 go build -o {{.BINARY_NAME}}.exe main.go
+      - GOOS=darwin GOARCH=amd64 go build -o {{.BINARY_NAME}}-macos main.go
+
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - go clean
+      - rm -f {{.BINARY_NAME}} {{.BINARY_NAME}}.exe {{.BINARY_NAME}}-linux {{.BINARY_NAME}}-macos {{.COVERAGE_FILE}} coverage.html
+
+  # Integration tests
+  examples:
+    desc: Test simple example
+    deps: [build]
+    cmds:
+      - powershell -c "cd examples/simple; ../../{{.BINARY_NAME}} build"
+
+  examples-complex:
+    desc: Test complex example
+    deps: [build]
+    cmds:
+      - powershell -c "cd examples/complex; ../../{{.BINARY_NAME}} build"
+
+  # Combined tasks
+  check:
+    desc: Run all quality checks
+    deps: [fmt, vet, lint, test]
+
+  all:
+    desc: Run everything
+    deps: [clean, check, test-race, examples, examples-complex]
+
+  # Install dependencies
+  deps:
+    desc: Install development dependencies
+    cmds:
+      - go mod download
+      - go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+  # Pre-push workflow
+  pre-push:
+    desc: Pre-push checks
+    deps: [fmt, test, build, examples, examples-complex]

@@ -1,0 +1,45 @@
+package cmd
+
+import (
+	"fmt"
+
+	"github.com/hakkim/takwin-go/internal/build"
+	"github.com/hakkim/takwin-go/internal/config"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+)
+
+var (
+	target string
+)
+
+// buildCmd represents the build command
+var buildCmd = &cobra.Command{
+	Use:   "build",
+	Short: "Build the project targets",
+	Long: `Build one or more targets defined in the build configuration.
+If no target is specified, builds the default target.`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		// Load configuration
+		cfg, err := config.Load(viper.ConfigFileUsed())
+		if err != nil {
+			return fmt.Errorf("failed to load config: %w", err)
+		}
+
+		// Create build engine
+		engine := build.NewEngine(cfg)
+
+		// Build target
+		if target != "" {
+			return engine.BuildTarget(target)
+		}
+
+		return engine.BuildDefault()
+	},
+}
+
+func init() {
+	rootCmd.AddCommand(buildCmd)
+
+	buildCmd.Flags().StringVarP(&target, "target", "t", "", "specific target to build")
+}
