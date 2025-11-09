@@ -326,7 +326,7 @@ takwin clean
 ### Docker Usage
 
 ```dockerfile
-FROM ghcr.io/hakkim/takwin-go:latest
+FROM ghcr.io/hakkim/takwin:latest
 COPY . /workspace
 WORKDIR /workspace
 RUN takwin build

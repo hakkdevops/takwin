@@ -38,7 +38,7 @@ linters-settings:
     line-length: 120
   
   goimports:
-    local-prefixes: github.com/hakkim/takwin-go
+    local-prefixes: github.com/hakkim/takwin
   
   gocritic:
     enabled-tags:

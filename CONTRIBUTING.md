@@ -8,8 +8,8 @@ Thank you for your interest in contributing to Takwin! This document provides gu
 
 1. **Fork and Clone**
    ```bash
-   git clone https://github.com/yourusername/takwin-go.git
-   cd takwin-go
+   git clone https://github.com/yourusername/takwin.git
+   cd takwin
    ```
 
 2. **Install Dependencies**
@@ -104,7 +104,7 @@ import (
     "github.com/spf13/cobra"
     
     // Local imports
-    "github.com/hakkim/takwin-go/internal/config"
+    "github.com/hakkim/takwin/internal/config"
 )
 
 // Exported functions have comments
@@ -269,7 +269,7 @@ Brief description of changes.
 
 ### Project Structure
 ```
-takwin-go/
+takwin/
 ├── main.go                 # Entry point
 ├── cmd/                    # CLI commands (Cobra)
 │   ├── root.go            # Root command

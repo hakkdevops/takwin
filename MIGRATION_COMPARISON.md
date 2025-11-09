@@ -26,7 +26,7 @@ takwin/
 
 ### Go Version Structure
 ```
-takwin-go/
+takwin/
 ├── main.go                      # Entry point
 ├── cmd/                         # Cobra-based CLI
 │   ├── root.go                  # Root command
@@ -237,7 +237,7 @@ poetry run takwin build
 ### Go Deployment
 ```bash
 # Single binary deployment
-curl -L https://github.com/hakkim/takwin-go/releases/latest/download/takwin-linux-amd64 -o takwin
+curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64 -o takwin
 chmod +x takwin
 ./takwin build
 ```

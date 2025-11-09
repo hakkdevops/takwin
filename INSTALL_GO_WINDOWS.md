@@ -58,11 +58,11 @@ scoop install go
 
 ## After Installation
 
-Once Go is installed, navigate to the takwin-go directory and run:
+Once Go is installed, navigate to the takwin directory and run:
 
 ```powershell
 # Navigate to project
-cd takwin-go
+cd takwin
 
 # Initialize Go module
 go mod tidy
@@ -119,7 +119,7 @@ go version go1.21.5 windows/amd64
 
 Once Go is installed:
 
-1. **Navigate to takwin-go directory**
+1. **Navigate to takwin directory**
 2. **Run setup commands**:
    ```powershell
    go mod tidy

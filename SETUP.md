@@ -35,7 +35,7 @@ go version
 ### 1. Initialize Go Module
 
 ```bash
-cd takwin-go
+cd takwin
 go mod tidy
 ```
 
@@ -120,7 +120,7 @@ GOOS=darwin GOARCH=amd64 go build -o takwin main.go
 ## Project Structure Explained
 
 ```
-takwin-go/
+takwin/
 ├── main.go                 # Entry point - calls cmd.Execute()
 ├── go.mod                  # Go module definition
 ├── go.sum                  # Dependency checksums (auto-generated)
@@ -221,7 +221,7 @@ takwin-go/
 - Delete `go.sum` and run `go mod download` if needed
 
 ### Build Issues
-- Ensure you're in the `takwin-go` directory
+- Ensure you're in the `takwin` directory
 - Check that all source files are present
 - Run `go mod verify` to check dependencies
 

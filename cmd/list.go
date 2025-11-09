@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/hakkim/takwin-go/internal/config"
+	"github.com/hakkim/takwin/internal/config"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )

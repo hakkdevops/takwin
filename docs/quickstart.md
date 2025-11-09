@@ -13,26 +13,26 @@ Get up and running with Takwin in under 5 minutes!
 
 ```bash
 # Linux (x64)
-curl -L https://github.com/hakkim/takwin-go/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
 sudo mv takwin-linux-amd64 /usr/local/bin/takwin
 
 # macOS (x64)
-curl -L https://github.com/hakkim/takwin-go/releases/latest/download/takwin-darwin-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-darwin-amd64.tar.gz | tar -xz
 sudo mv takwin-darwin-amd64 /usr/local/bin/takwin
 
 # macOS (Homebrew)
 brew tap hakkim/tap && brew install takwin
 
 # Windows (PowerShell)
-Invoke-WebRequest -Uri "https://github.com/hakkim/takwin-go/releases/latest/download/takwin-windows-amd64.zip" -OutFile "takwin.zip"
+Invoke-WebRequest -Uri "https://github.com/hakkim/takwin/releases/latest/download/takwin-windows-amd64.zip" -OutFile "takwin.zip"
 Expand-Archive -Path "takwin.zip" -DestinationPath "C:\Program Files\Takwin"
 ```
 
 ### Option 2: Build from Source
 
 ```bash
-git clone https://github.com/hakkim/takwin-go.git
-cd takwin-go
+git clone https://github.com/hakkim/takwin.git
+cd takwin
 go build -o takwin main.go
 sudo mv takwin /usr/local/bin/  # Linux/macOS
 ```
@@ -315,8 +315,8 @@ takwin list-targets
 ## Getting Help
 
 - **Documentation**: Browse the [docs](.) directory
-- **Issues**: Report bugs on [GitHub Issues](https://github.com/hakkim/takwin-go/issues)
-- **Discussions**: Ask questions in [GitHub Discussions](https://github.com/hakkim/takwin-go/discussions)
+- **Issues**: Report bugs on [GitHub Issues](https://github.com/hakkim/takwin/issues)
+- **Discussions**: Ask questions in [GitHub Discussions](https://github.com/hakkim/takwin/discussions)
 
 ---
 

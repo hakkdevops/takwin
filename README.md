@@ -1,10 +1,10 @@
 # Takwin
 
-[![CI Pipeline](https://github.com/hakkim/takwin-go/actions/workflows/ci.yml/badge.svg)](https://github.com/hakkim/takwin-go/actions/workflows/ci.yml)
-[![Release](https://github.com/hakkim/takwin-go/actions/workflows/release.yml/badge.svg)](https://github.com/hakkim/takwin-go/actions/workflows/release.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/hakkim/takwin-go)](https://goreportcard.com/report/github.com/hakkim/takwin-go)
-[![codecov](https://codecov.io/gh/hakkim/takwin-go/branch/main/graph/badge.svg)](https://codecov.io/gh/hakkim/takwin-go)
-[![GitHub release](https://img.shields.io/github/release/hakkim/takwin-go.svg)](https://github.com/hakkim/takwin-go/releases)
+[![CI Pipeline](https://github.com/hakkim/takwin/actions/workflows/ci.yml/badge.svg)](https://github.com/hakkim/takwin/actions/workflows/ci.yml)
+[![Release](https://github.com/hakkim/takwin/actions/workflows/release.yml/badge.svg)](https://github.com/hakkim/takwin/actions/workflows/release.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/hakkim/takwin)](https://goreportcard.com/report/github.com/hakkim/takwin)
+[![codecov](https://codecov.io/gh/hakkim/takwin/branch/main/graph/badge.svg)](https://codecov.io/gh/hakkim/takwin)
+[![GitHub release](https://img.shields.io/github/release/hakkim/takwin.svg)](https://github.com/hakkim/takwin/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A modern, lightning-fast build tool for C and C++ projects. Built with Go for enterprise-grade performance and reliability.
@@ -41,18 +41,18 @@ A modern, lightning-fast build tool for C and C++ projects. Built with Go for en
 
 ```bash
 # Linux/macOS
-curl -L https://github.com/hakkim/takwin-go/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
 sudo mv takwin-linux-amd64 /usr/local/bin/takwin
 
 # macOS (Homebrew)
 brew tap hakkim/tap && brew install takwin
 
 # Windows (PowerShell)
-Invoke-WebRequest -Uri "https://github.com/hakkim/takwin-go/releases/latest/download/takwin-windows-amd64.zip" -OutFile "takwin.zip"
+Invoke-WebRequest -Uri "https://github.com/hakkim/takwin/releases/latest/download/takwin-windows-amd64.zip" -OutFile "takwin.zip"
 Expand-Archive -Path "takwin.zip" -DestinationPath "C:\Program Files\Takwin"
 
 # Docker
-docker pull ghcr.io/hakkim/takwin-go:latest
+docker pull ghcr.io/hakkim/takwin:latest
 ```
 
 ### Your First Build
@@ -148,7 +148,7 @@ takwin --help
 | **[Configuration Reference](docs/configuration.md)** | Complete configuration options |
 | **[CLI Reference](docs/cli.md)** | Command-line interface documentation |
 | **[Examples](docs/examples.md)** | Real-world usage examples |
-| **[API Documentation](https://pkg.go.dev/github.com/hakkim/takwin-go)** | Go package documentation |
+| **[API Documentation](https://pkg.go.dev/github.com/hakkim/takwin)** | Go package documentation |
 
 ## 🔧 Configuration
 
@@ -330,8 +330,8 @@ sources = ["src/*.cpp"]
 
 ### Building from Source
 ```bash
-git clone https://github.com/hakkim/takwin-go.git
-cd takwin-go
+git clone https://github.com/hakkim/takwin.git
+cd takwin
 
 # Install dependencies
 go mod download
@@ -401,7 +401,7 @@ cd examples/complex && ../../takwin build -t mathlib  # Test complex example
 ### Project Structure
 
 ```
-takwin-go/                  # Repository root
+takwin/                  # Repository root
 ├── main.go                 # Entry point
 ├── cmd/                    # CLI commands (Cobra)
 │   ├── root.go            # Root command and global flags
@@ -444,7 +444,7 @@ takwin-go/                  # Repository root
 # GitHub Actions example
 - name: Setup Takwin
   run: |
-    curl -L https://github.com/hakkim/takwin-go/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
+    curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
     sudo mv takwin-linux-amd64 /usr/local/bin/takwin
 
 - name: Build Project
@@ -456,7 +456,7 @@ takwin-go/                  # Repository root
 
 ### Docker Usage
 ```dockerfile
-FROM ghcr.io/hakkim/takwin-go:latest AS builder
+FROM ghcr.io/hakkim/takwin:latest AS builder
 COPY . /workspace
 WORKDIR /workspace
 RUN takwin build
@@ -480,8 +480,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 ### Quick Contribution Setup
 ```bash
 # Fork and clone
-git clone https://github.com/yourusername/takwin-go.git
-cd takwin-go
+git clone https://github.com/yourusername/takwin.git
+cd takwin
 
 # Create feature branch
 git checkout -b feature/amazing-feature
@@ -569,10 +569,10 @@ git push origin feature/amazing-feature
 
 ## 🔗 Links
 
-- **[GitHub Repository](https://github.com/hakkim/takwin-go)**
+- **[GitHub Repository](https://github.com/hakkim/takwin)**
 - **[Release Notes](CHANGELOG.md)**
-- **[Issue Tracker](https://github.com/hakkim/takwin-go/issues)**
-- **[Discussions](https://github.com/hakkim/takwin-go/discussions)**
+- **[Issue Tracker](https://github.com/hakkim/takwin/issues)**
+- **[Discussions](https://github.com/hakkim/takwin/discussions)**
 - **[Security Policy](SECURITY.md)**
 
 ## 📚 Resources
@@ -588,21 +588,21 @@ git push origin feature/amazing-feature
 - **[Security Policy](SECURITY.md)** - Security and vulnerability reporting
 
 ### Development Resources
-- **[API Documentation](https://pkg.go.dev/github.com/hakkim/takwin-go)** - Go package documentation
+- **[API Documentation](https://pkg.go.dev/github.com/hakkim/takwin)** - Go package documentation
 - **[Architecture Guide](docs/architecture.md)** - Internal design and structure
 - **[Testing Guide](docs/testing.md)** - Testing strategies and practices
 - **[Release Process](docs/release.md)** - How releases are made
 
 ### Community & Support
-- **[GitHub Repository](https://github.com/hakkim/takwin-go)** - Source code and development
-- **[Issue Tracker](https://github.com/hakkim/takwin-go/issues)** - Bug reports and feature requests
-- **[Discussions](https://github.com/hakkim/takwin-go/discussions)** - Community discussions and Q&A
+- **[GitHub Repository](https://github.com/hakkim/takwin)** - Source code and development
+- **[Issue Tracker](https://github.com/hakkim/takwin/issues)** - Bug reports and feature requests
+- **[Discussions](https://github.com/hakkim/takwin/discussions)** - Community discussions and Q&A
 - **[Release Notes](CHANGELOG.md)** - Version history and changes
 
 ### Integration & Deployment
-- **[Docker Hub](https://hub.docker.com/r/hakkim/takwin-go)** - Official Docker images
-- **[GitHub Packages](https://github.com/hakkim/takwin-go/packages)** - Container registry
-- **[GitHub Actions](https://github.com/hakkim/takwin-go/actions)** - CI/CD pipelines
+- **[Docker Hub](https://hub.docker.com/r/hakkim/takwin)** - Official Docker images
+- **[GitHub Packages](https://github.com/hakkim/takwin/packages)** - Container registry
+- **[GitHub Actions](https://github.com/hakkim/takwin/actions)** - CI/CD pipelines
 - **[Homebrew Formula](https://github.com/hakkim/homebrew-tap)** - macOS package manager
 
 ### Comparison & Migration

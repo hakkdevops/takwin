@@ -98,15 +98,15 @@ jobs:
         ### Quick Install (Linux/macOS)
         \`\`\`bash
         # Linux (x64)
-        curl -L https://github.com/hakkim/takwin-go/releases/download/${VERSION}/takwin-linux-amd64.tar.gz | tar -xz
+        curl -L https://github.com/hakkim/takwin/releases/download/${VERSION}/takwin-linux-amd64.tar.gz | tar -xz
         sudo mv takwin-linux-amd64 /usr/local/bin/takwin
         
         # macOS (x64)
-        curl -L https://github.com/hakkim/takwin-go/releases/download/${VERSION}/takwin-darwin-amd64.tar.gz | tar -xz
+        curl -L https://github.com/hakkim/takwin/releases/download/${VERSION}/takwin-darwin-amd64.tar.gz | tar -xz
         sudo mv takwin-darwin-amd64 /usr/local/bin/takwin
         
         # macOS (ARM64)
-        curl -L https://github.com/hakkim/takwin-go/releases/download/${VERSION}/takwin-darwin-arm64.tar.gz | tar -xz
+        curl -L https://github.com/hakkim/takwin/releases/download/${VERSION}/takwin-darwin-arm64.tar.gz | tar -xz
         sudo mv takwin-darwin-arm64 /usr/local/bin/takwin
         \`\`\`
         
@@ -130,7 +130,7 @@ jobs:
         
         ## 🐛 Bug Reports
         
-        Please report issues at: https://github.com/hakkim/takwin-go/issues
+        Please report issues at: https://github.com/hakkim/takwin/issues
         EOF
         
         echo "RELEASE_NOTES<<EOF" >> $GITHUB_OUTPUT
@@ -206,6 +206,6 @@ jobs:
         formula-name: takwin
         homebrew-tap: hakkim/homebrew-tap
         base-branch: main
-        download-url: https://github.com/hakkim/takwin-go/releases/download/${{ github.ref_name }}/takwin-darwin-amd64.tar.gz
+        download-url: https://github.com/hakkim/takwin/releases/download/${{ github.ref_name }}/takwin-darwin-amd64.tar.gz
       env:
         COMMITTER_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
