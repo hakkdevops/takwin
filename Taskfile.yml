@@ -94,3 +94,66 @@ tasks:
   pre-push:
     desc: Pre-push checks
     deps: [fmt, test, build, examples, examples-complex]
+
+  # Documentation tasks
+  docs-install:
+    desc: Install documentation dependencies
+    cmds:
+      - pip install -r requirements.txt
+    sources:
+      - requirements.txt
+
+  docs-serve:
+    desc: Serve documentation locally
+    deps: [docs-install]
+    cmds:
+      - mkdocs serve
+
+  docs-build:
+    desc: Build documentation
+    deps: [docs-install]
+    cmds:
+      - mkdocs build
+
+  docs-deploy:
+    desc: Deploy documentation to GitHub Pages
+    deps: [docs-install]
+    cmds:
+      - mkdocs gh-deploy --force
+
+  docs-clean:
+    desc: Clean documentation build artifacts
+    cmds:
+      - powershell -c "if (Test-Path site) { Remove-Item -Recurse -Force site }"
+
+  docs-check:
+    desc: Check documentation for broken links
+    deps: [docs-install]
+    cmds:
+      - mkdocs build --strict
+
+  docs-update:
+    desc: Update documentation dependencies
+    cmds:
+      - pip install --upgrade -r requirements.txt
+
+  # Python environment management
+  python-check:
+    desc: Check if Python is installed
+    cmds:
+      - python --version
+      - pip --version
+
+  python-venv:
+    desc: Create Python virtual environment (optional)
+    cmds:
+      - python -m venv venv
+      - powershell -c "Write-Host 'Virtual environment created in venv/'"
+
+  # Combined tasks
+  docs-setup:
+    desc: Complete documentation setup
+    cmds:
+      - task: python-check
+      - task: docs-install
+      - powershell -c "Write-Host '✅ Documentation setup complete! Run task docs-serve to preview.'"

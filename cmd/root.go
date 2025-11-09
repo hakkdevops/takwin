@@ -20,7 +20,7 @@ var rootCmd = &cobra.Command{
 	Long: `Takwin is a modern build tool for C and C++ projects using TOML configuration files.
 It provides a simple, readable alternative to traditional Makefiles with support for
 multiple compilers, cross-platform builds, and flexible project structures.`,
-	Version: "2.0.0",
+	Version: "0.1.0",
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

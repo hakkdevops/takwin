@@ -1,0 +1,156 @@
+site_name: Takwin
+site_description: Modern, lightning-fast build tool for C and C++ projects
+site_author: Hakkim
+site_url: https://hakkim.github.io/takwin
+repo_url: https://github.com/hakkim/takwin
+repo_name: hakkim/takwin
+edit_uri: edit/main/docs/
+
+copyright: Copyright &copy; 2024 Hakkim
+
+theme:
+  name: material
+  language: en
+  palette:
+    # Light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+  
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/hakkim/takwin
+  version:
+    provider: mike
+    default: latest
+
+nav:
+  - Home: index.md
+  
+  # USER DOCUMENTATION
+  - User Guide:
+    - Getting Started:
+      - Installation: user-guide/installation.md
+      - Quick Start: user-guide/quickstart.md
+    - Usage:
+      - Configuration: user-guide/configuration.md
+      - CLI Reference: user-guide/cli.md
+      - Examples: user-guide/examples.md
+    - Troubleshooting: user-guide/troubleshooting.md
+    - FAQ: user-guide/faq.md
+  
+  # CONTRIBUTOR DOCUMENTATION
+  - Contributing:
+    - Overview: contributing/index.md
+    - Getting Started: contributing/getting-started.md
+    - Development Setup: contributing/development-setup.md
+    - Code Guidelines: contributing/code-guidelines.md
+    - Testing: contributing/testing.md
+    - Documentation: contributing/documentation.md
+    - Pull Requests: contributing/pull-requests.md
+  
+  # MAINTAINER/INTERNAL DOCUMENTATION
+  - Maintainer Guide:
+    - Overview: maintainer/index.md
+    - Architecture: maintainer/architecture.md
+    - Release Process:
+      - Overview: maintainer/release/overview.md
+      - Beta Release: maintainer/release/beta-release.md
+      - Stable Release: maintainer/release/stable-release.md
+      - Distribution: maintainer/release/distribution.md
+    - Version Strategy: maintainer/version-strategy.md
+    - CI/CD: maintainer/cicd.md
+  
+  # REFERENCE
+  - Reference:
+    - Changelog: reference/CHANGELOG.md
+    - Security: reference/SECURITY.md
+    - License: reference/LICENSE.md
+
+markdown_extensions:
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+  
+  # Python Markdown Extensions
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+  - minify:
+      minify_html: true
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
