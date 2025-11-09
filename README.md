@@ -29,8 +29,8 @@ A modern, lightning-fast build tool for C and C++ projects. Built with Go for en
 
 ## 🚀 Why Takwin?
 
-**20x Faster Than Traditional Build Tools**
-- **Instant startup**: ~50ms vs ~1000ms+ for Python-based tools
+**Lightning-Fast Build Tool**
+- **Instant startup**: ~50ms startup time
 - **Single binary**: No runtime dependencies or complex installations
 - **Cross-platform**: Native support for Linux, macOS, and Windows
 - **Enterprise-ready**: Comprehensive testing, CI/CD, and security scanning
@@ -312,15 +312,15 @@ sources = ["src/*.cpp"]
 
 > **📚 More examples available in the [Examples Documentation](docs/examples.md)**
 
-## 🚀 Performance Comparison
+## 🚀 Performance Metrics
 
-| Metric | Python Takwin | Go Takwin | Improvement |
-|--------|---------------|-----------|-------------|
-| **Startup Time** | ~1,000ms | ~50ms | **20x faster** |
-| **Memory Usage** | ~25MB | ~5MB | **5x less** |
-| **Binary Size** | ~50MB+ deps | ~8MB | **6x smaller** |
-| **Build Speed** | Moderate | Fast | **2-5x faster** |
-| **Distribution** | Complex | Single binary | **Simplified** |
+| Metric | Value | Benefit |
+|--------|-------|---------|
+| **Startup Time** | ~50ms | Instant feedback |
+| **Memory Usage** | ~5MB | Lightweight footprint |
+| **Binary Size** | ~8MB | Easy distribution |
+| **Build Speed** | Fast | Efficient compilation |
+| **Distribution** | Single binary | No dependencies |
 
 ## 🛠️ Development
 
@@ -605,9 +605,7 @@ git push origin feature/amazing-feature
 - **[GitHub Actions](https://github.com/hakkim/takwin/actions)** - CI/CD pipelines
 - **[Homebrew Formula](https://github.com/hakkim/homebrew-tap)** - macOS package manager
 
-### Comparison & Migration
-- **[Python vs Go Comparison](MIGRATION_COMPARISON.md)** - Detailed feature comparison
-- **[Migration Guide](docs/migration.md)** - Moving from Python version
+### Performance & Compatibility
 - **[Performance Benchmarks](docs/benchmarks.md)** - Speed and efficiency metrics
 - **[Compatibility Matrix](docs/compatibility.md)** - Platform and compiler support
 

@@ -130,6 +130,6 @@ Once Go is installed:
    ```powershell
    .\takwin.exe build --config examples\simple\build.toml
    ```
-4. **Compare performance** with Python version
+4. **Verify installation** is working correctly
 
 Choose the method that works best for your system. The direct download from the Go website is usually the most reliable option.

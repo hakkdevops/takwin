@@ -19,15 +19,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Documentation and examples
 
 ### Changed
-- Complete rewrite from Python to Go for better performance
+- Modern Go implementation for optimal performance
 - Single binary distribution (no runtime dependencies)
-- 20x+ faster startup time compared to Python version
+- Fast startup time (~50ms)
 - Improved error handling and validation
 
 ### Performance
-- Startup time: ~50ms (vs ~1000ms Python version)
-- Memory usage: ~5MB (vs ~25MB Python version)
-- Binary size: ~8MB (vs ~50MB+ Python + dependencies)
+- Startup time: ~50ms
+- Memory usage: ~5MB
+- Binary size: ~8MB
 
 ## [2.0.0] - 2024-01-XX
 
@@ -83,7 +83,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Configuration reference
   - Usage examples
   - API documentation
-  - Migration guide from Python version
 
 ### Technical Details
 - **Language**: Go 1.21+
@@ -91,19 +90,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Platforms**: Linux (amd64, arm64), macOS (amd64, arm64), Windows (amd64)
 - **Architecture**: Clean, modular design with interfaces
 - **Testing**: >85% code coverage
-- **Performance**: 20x+ faster than Python version
-
-### Migration from Python Version
-- 100% configuration file compatibility
-- Identical command-line interface
-- Same build behavior and output
-- No breaking changes for existing users
+- **Performance**: Optimized for speed and efficiency
 
 ## Version History
-
-### Pre-2.0.0 (Python Version)
-- Original Python implementation
-- Poetry-based dependency management
 - Click-based CLI
 - Comprehensive test suite (101 tests)
 - CI/CD with GitHub Actions
@@ -125,8 +114,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Supported Versions
 - **Current**: v2.x.x (Active development)
-- **Previous**: v1.x.x (Python version, maintenance only)
-- **Legacy**: v0.x.x (Deprecated)
+- **Legacy**: v1.x.x and earlier (Deprecated)
 
 ### Security Updates
 Security vulnerabilities are addressed in:

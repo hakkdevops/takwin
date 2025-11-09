@@ -183,15 +183,15 @@ takwin/
 - Enforces clean API boundaries
 - Prevents accidental dependencies
 
-## Migration Benefits
+## Key Benefits
 
-### Performance Improvements
-- **Startup time**: Go binary starts instantly vs Python interpreter
-- **Memory usage**: Lower memory footprint
-- **Execution speed**: Compiled Go is much faster than interpreted Python
+### Performance
+- **Startup time**: Binary starts instantly (~50ms)
+- **Memory usage**: Low memory footprint (~5MB)
+- **Execution speed**: Compiled for optimal performance
 
 ### Distribution Benefits
-- **Single binary**: No Python runtime or dependencies needed
+- **Single binary**: No runtime dependencies needed
 - **Cross-compilation**: Build for any platform from any platform
 - **Easy deployment**: Just copy the binary
 
@@ -206,8 +206,7 @@ takwin/
 1. **Install Go** if not already installed
 2. **Run setup commands** listed above
 3. **Test with examples** to verify everything works
-4. **Compare performance** with Python version
-5. **Extend functionality** as needed
+4. **Extend functionality** as needed
 
 ## Troubleshooting
 
