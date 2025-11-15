@@ -103,7 +103,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
           destination_dir: preview/${{ steps.branch.outputs.safe }}
-          keep_files: false
+          keep_files: true
 
       - name: Comment PR with preview link
         if: github.event_name == 'pull_request'
