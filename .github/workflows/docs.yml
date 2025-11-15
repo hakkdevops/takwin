@@ -103,6 +103,14 @@ jobs:
         run: |
           mike deploy --push --update-aliases dev development
           mike set-default --push dev
+          
+          # Add .nojekyll at root to prevent Jekyll processing
+          git fetch origin gh-pages
+          git checkout gh-pages
+          touch .nojekyll
+          git add .nojekyll
+          git commit -m "Add .nojekyll to prevent Jekyll processing" || true
+          git push origin gh-pages
 
       - name: Deploy versioned docs
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
