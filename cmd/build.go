@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/hakkdevops/takwin/internal/build"
 	"github.com/hakkdevops/takwin/internal/config"
+	"github.com/hakkdevops/takwin/internal/engine"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -27,14 +27,14 @@ If no target is specified, builds the default target.`,
 		}
 
 		// Create build engine
-		engine := build.NewEngine(cfg)
+		buildEngine := engine.NewEngine(cfg)
 
 		// Build target
 		if target != "" {
-			return engine.BuildTarget(target)
+			return buildEngine.BuildTarget(target)
 		}
 
-		return engine.BuildDefault()
+		return buildEngine.BuildDefault()
 	},
 }
 

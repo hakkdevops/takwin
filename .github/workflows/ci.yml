@@ -21,6 +21,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Set up Go
       uses: actions/setup-go@v4
@@ -37,13 +39,18 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-go-${{ matrix.go-version }}-
 
-    - name: Prepare dependencies
+    - name: Verify Go module
       run: |
-        go mod download
-        go mod verify
+        pwd
+        ls -la
+        cat go.mod
+        ls -la internal/
+        ls -la internal/build/ || echo "internal/build does not exist"
 
     - name: Run tests
       run: go test -race -coverprofile=coverage.out -covermode=atomic ./...
+      
+
 
     - name: Upload coverage to Codecov
       if: matrix.os == 'ubuntu-latest' && matrix.go-version == '1.22'
@@ -66,11 +73,6 @@ jobs:
       with:
         go-version: ${{ env.GO_VERSION }}
 
-    - name: Tidy and download dependencies
-      run: |
-        go mod download
-        go mod verify
-
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v3
       with:
@@ -89,10 +91,6 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: ${{ env.GO_VERSION }}
-
-    - name: Prepare dependencies
-      run: |
-        go mod download
 
     - name: Run Gosec Security Scanner
       run: |
