@@ -76,11 +76,15 @@ jobs:
     - name: Download dependencies
       run: go mod download
 
+    - name: Verify dependencies
+      run: go mod verify
+
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v3
       with:
         version: latest
         args: --timeout=5m
+        skip-cache: true
 
   security:
     name: Security Scan

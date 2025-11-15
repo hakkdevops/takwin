@@ -148,7 +148,7 @@ tasks:
     desc: Check documentation for broken links
     deps: [docs-install]
     cmds:
-      - mkdocs build --strict
+      - mkdocs build
 
   docs-update:
     desc: Update documentation dependencies

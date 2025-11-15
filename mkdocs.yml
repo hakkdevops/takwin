@@ -61,13 +61,9 @@ nav:
   
   # USER DOCUMENTATION
   - User Guide:
-    - Getting Started:
-      - Installation: user-guide/installation.md
-      - Quick Start: user-guide/quickstart.md
-    - Usage:
-      - Configuration: user-guide/configuration.md
-      - CLI Reference: user-guide/cli.md
-      - Examples: user-guide/examples.md
+    - Installation: user-guide/installation.md
+    - Quick Start: user-guide/quickstart.md
+    - CLI Reference: user-guide/cli.md
     - Troubleshooting: user-guide/troubleshooting.md
     - FAQ: user-guide/faq.md
   
@@ -75,23 +71,12 @@ nav:
   - Contributing:
     - Overview: contributing/index.md
     - Getting Started: contributing/getting-started.md
-    - Development Setup: contributing/development-setup.md
-    - Code Guidelines: contributing/code-guidelines.md
-    - Testing: contributing/testing.md
-    - Documentation: contributing/documentation.md
-    - Pull Requests: contributing/pull-requests.md
   
   # MAINTAINER/INTERNAL DOCUMENTATION
   - Maintainer Guide:
     - Overview: maintainer/index.md
     - Architecture: maintainer/architecture.md
-    - Release Process:
-      - Overview: maintainer/release/overview.md
-      - Beta Release: maintainer/release/beta-release.md
-      - Stable Release: maintainer/release/stable-release.md
-      - Distribution: maintainer/release/distribution.md
     - Version Strategy: maintainer/version-strategy.md
-    - CI/CD: maintainer/cicd.md
   
   # REFERENCE
   - Reference:
