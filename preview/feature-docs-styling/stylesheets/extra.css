@@ -30,6 +30,24 @@
   background: linear-gradient(135deg, var(--takwin-gradient-start) 0%, var(--takwin-gradient-end) 100%);
 }
 
+/* Logo styling - white background for visibility */
+.md-header__button.md-logo,
+.md-logo {
+  background-color: white;
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg,
+.md-logo img,
+.md-logo svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 /* Links with brand color */
 .md-typeset a {
   color: var(--takwin-blue);
