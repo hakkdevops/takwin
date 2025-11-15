@@ -14,7 +14,7 @@ takwin [global options] <command> [command options]
 
 | Flag | Short | Description | Default |
 |------|-------|-------------|---------|
-| `--config` | `-c` | Configuration file path | `build.toml` |
+| `--config` | | Configuration file path | `build.toml` |
 | `--verbose` | `-v` | Enable verbose output | `false` |
 | `--help` | `-h` | Show help information | - |
 | `--version` | | Show version information | - |
@@ -27,6 +27,7 @@ takwin --config my-config.toml build
 
 # Enable verbose output
 takwin --verbose build
+takwin -v build
 
 # Show version
 takwin --version
@@ -49,12 +50,12 @@ takwin build [options]
 
 | Flag | Short | Description | Default |
 |------|-------|-------------|---------|
-| `--target` | `-t` | Specific target to build | All targets |
+| `--target` | `-t` | Specific target to build | Default target |
 
 #### Examples
 
 ```bash
-# Build all targets
+# Build default target
 takwin build
 
 # Build specific target
@@ -69,7 +70,7 @@ takwin build -v
 takwin build --config release.toml
 
 # Combine options
-takwin build -t mylib -v -c debug.toml
+takwin build -t mylib -v --config debug.toml
 ```
 
 #### Output
@@ -79,29 +80,8 @@ $ takwin build
 Building target 'myapp' (executable)
 Source files: [/path/to/src/main.cpp, /path/to/src/utils.cpp]
 Output: build/bin/myapp
-Running: g++ -O2 -Iinclude /path/to/src/main.cpp /path/to/src/utils.cpp -o build/bin/myapp
-Build completed successfully
-```
-
-#### Verbose Output
-
-```bash
-$ takwin build -v
-Using config file: /path/to/build.toml
-Loading configuration...
-Validating configuration...
-Building target 'myapp' (executable)
-Creating output directory: build/bin
-Resolving source files...
-Source files: [/path/to/src/main.cpp, /path/to/src/utils.cpp]
-Output: build/bin/myapp
-Compiler: gcc
-Optimization: O2
-Include paths: [include]
-Libraries: [pthread]
-Running: g++ -O2 -Iinclude /path/to/src/main.cpp /path/to/src/utils.cpp -o build/bin/myapp -lpthread
-Command completed successfully
-Build completed successfully
+Running: g++ /path/to/src/main.cpp /path/to/src/utils.cpp -o build/bin/myapp
+Command execution completed (dry run)
 ```
 
 ### `clean`
@@ -109,7 +89,7 @@ Build completed successfully
 Remove build artifacts and output directories.
 
 ```bash
-takwin clean [options]
+takwin clean
 ```
 
 #### Examples
@@ -137,7 +117,7 @@ Cleaned build directory: /path/to/project/build
 Display all available build targets defined in the configuration.
 
 ```bash
-takwin list-targets [options]
+takwin list-targets
 ```
 
 #### Examples
@@ -171,7 +151,6 @@ Available targets (3):
   tests
     Type: executable
     Sources: tests/*.cpp
-    Libraries: mylib
 ```
 
 ### `help`
@@ -196,13 +175,12 @@ takwin help list-targets
 
 ## Configuration File
 
-### Default Locations
+### Default Location
 
-Takwin looks for configuration files in this order:
+Takwin looks for the configuration file in this order:
 
 1. File specified with `--config` flag
 2. `build.toml` in current directory
-3. `takwin.toml` in current directory
 
 ### Custom Configuration
 
@@ -212,78 +190,6 @@ takwin --config release.toml build
 
 # Use config from different directory
 takwin --config ../configs/debug.toml build
-```
-
-## Exit Codes
-
-| Code | Description |
-|------|-------------|
-| `0` | Success |
-| `1` | General error |
-| `2` | Configuration error |
-| `3` | Build error |
-| `4` | File not found |
-
-## Environment Variables
-
-### `TAKWIN_CONFIG`
-
-Override default configuration file:
-
-```bash
-export TAKWIN_CONFIG=my-config.toml
-takwin build  # Uses my-config.toml
-```
-
-### `TAKWIN_VERBOSE`
-
-Enable verbose output by default:
-
-```bash
-export TAKWIN_VERBOSE=1
-takwin build  # Runs with verbose output
-```
-
-### `TAKWIN_COMPILER`
-
-Override default compiler:
-
-```bash
-export TAKWIN_COMPILER=clang
-takwin build  # Uses clang instead of gcc
-```
-
-## Shell Completion
-
-### Bash
-
-```bash
-# Generate completion script
-takwin completion bash > /etc/bash_completion.d/takwin
-
-# Or for current user
-takwin completion bash > ~/.bash_completion.d/takwin
-```
-
-### Zsh
-
-```bash
-# Generate completion script
-takwin completion zsh > "${fpath[1]}/_takwin"
-```
-
-### Fish
-
-```bash
-# Generate completion script
-takwin completion fish > ~/.config/fish/completions/takwin.fish
-```
-
-### PowerShell
-
-```powershell
-# Generate completion script
-takwin completion powershell > takwin.ps1
 ```
 
 ## Advanced Usage
@@ -326,7 +232,7 @@ takwin clean
 ### Docker Usage
 
 ```dockerfile
-FROM ghcr.io/hakkim/takwin:latest
+FROM ghcr.io/hakkdevops/takwin:latest
 COPY . /workspace
 WORKDIR /workspace
 RUN takwin build
@@ -339,7 +245,7 @@ RUN takwin build
 **1. Configuration not found**
 ```bash
 $ takwin build
-Error: configuration file 'build.toml' not found
+Error: failed to load config: open build.toml: no such file or directory
 
 # Solution: Create build.toml or specify path
 takwin build --config path/to/config.toml
@@ -368,14 +274,11 @@ compiler = "clang"  # or "msvc"
 ### Debug Mode
 
 ```bash
-# Enable maximum verbosity
+# Enable verbose output
 takwin build -v
 
 # Check configuration parsing
 takwin list-targets -v
-
-# Verify file resolution
-takwin build -v | grep "Source files"
 ```
 
 ## Performance Tips
@@ -390,16 +293,6 @@ takwin build -t myapp
 # In build.toml:
 [build]
 compile_flags = ["-j4"]  # GCC parallel compilation
-```
-
-### Reduced Output
-
-```bash
-# Quiet mode (minimal output)
-takwin build 2>/dev/null
-
-# Only show errors
-takwin build 2>&1 | grep -i error
 ```
 
 ## Integration Examples
@@ -450,11 +343,31 @@ add_custom_target(takwin_build
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Takwin Clean",
+            "type": "shell",
+            "command": "takwin",
+            "args": ["clean"]
         }
     ]
 }
 ```
 
+## Platform Support
+
+Takwin supports the following platforms:
+
+- **Linux** (x64, ARM64)
+- **macOS** (x64, ARM64/Apple Silicon)
+- **Windows** (x64)
+
+Supported compilers:
+
+- **GCC** (default)
+- **Clang**
+- **MSVC** (Windows)
+
 ---
 
-For more information, see the [Configuration Reference](configuration.md) and [Examples](examples.md).
+For more information, see the [Configuration Reference](configuration.md) and [Quick Start Guide](quickstart.md).
