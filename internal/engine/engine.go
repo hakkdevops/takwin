@@ -12,6 +12,13 @@ import (
 	"github.com/hakkdevops/takwin/internal/sources"
 )
 
+// Target type constants
+const (
+	targetTypeExecutable    = "executable"
+	targetTypeStaticLibrary = "static_library"
+	targetTypeSharedLibrary = "shared_library"
+)
+
 // Engine handles the build process
 type Engine struct {
 	config   *config.Config
@@ -84,11 +91,11 @@ func (e *Engine) buildTarget(target *config.Target) error {
 
 	// Build based on target type
 	switch target.Type {
-	case "executable":
+	case targetTypeExecutable:
 		return e.buildExecutable(target, sourceFiles, outputPath)
-	case "static_library":
+	case targetTypeStaticLibrary:
 		return e.buildStaticLibrary(target, sourceFiles, outputPath)
-	case "shared_library":
+	case targetTypeSharedLibrary:
 		return e.buildSharedLibrary(target, sourceFiles, outputPath)
 	default:
 		return fmt.Errorf("unsupported target type: %s", target.Type)
@@ -165,9 +172,9 @@ func (e *Engine) getOutputDir(target *config.Target) string {
 	}
 
 	switch target.Type {
-	case "executable":
+	case targetTypeExecutable:
 		return filepath.Join(baseDir, "bin")
-	case "static_library", "shared_library":
+	case targetTypeStaticLibrary, targetTypeSharedLibrary:
 		return filepath.Join(baseDir, "lib")
 	default:
 		return baseDir
