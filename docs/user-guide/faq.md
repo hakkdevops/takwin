@@ -34,7 +34,7 @@ See the [Installation Guide](installation.md) for detailed instructions.
 
 Quick install:
 ```bash
-curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkdevops/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
 sudo mv takwin-linux-amd64 /usr/local/bin/takwin
 ```
 
@@ -46,7 +46,7 @@ No! Takwin is a single binary with no runtime dependencies.
 
 Yes! We provide official Docker images:
 ```bash
-docker pull ghcr.io/hakkim/takwin:latest
+docker pull ghcr.io/hakkdevops/takwin:latest
 ```
 
 ## Usage
@@ -163,7 +163,7 @@ Yes! Takwin is designed for CI/CD:
 ```yaml
 - name: Build with Takwin
   run: |
-    curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
+    curl -L https://github.com/hakkdevops/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
     ./takwin-linux-amd64 build
 ```
 
@@ -228,11 +228,11 @@ See the [Contributing Guide](../contributing/index.md).
 
 ### Where do I report bugs?
 
-[GitHub Issues](https://github.com/hakkim/takwin/issues)
+[GitHub Issues](https://github.com/hakkdevops/takwin/issues)
 
 ### Can I request features?
 
-Yes! Open a [feature request](https://github.com/hakkim/takwin/issues/new).
+Yes! Open a [feature request](https://github.com/hakkdevops/takwin/issues/new).
 
 ## Roadmap
 
@@ -252,15 +252,15 @@ See [Version Strategy](../maintainer/version-strategy.md) for the roadmap.
 
 ### When will v1.0.0 be released?
 
-When the API is stable and all core features are complete. Follow our [releases](https://github.com/hakkim/takwin/releases).
+When the API is stable and all core features are complete. Follow our [releases](https://github.com/hakkdevops/takwin/releases).
 
 ## Support
 
 ### Where can I get help?
 
 - **Documentation**: You're reading it!
-- **GitHub Discussions**: https://github.com/hakkim/takwin/discussions
-- **GitHub Issues**: https://github.com/hakkim/takwin/issues
+- **GitHub Discussions**: https://github.com/hakkdevops/takwin/discussions
+- **GitHub Issues**: https://github.com/hakkdevops/takwin/issues
 
 ### Is there commercial support?
 
@@ -268,4 +268,4 @@ Not currently. Community support is available through GitHub.
 
 ## Didn't find your answer?
 
-Ask in [GitHub Discussions](https://github.com/hakkim/takwin/discussions) or check the full [documentation](../index.md).
+Ask in [GitHub Discussions](https://github.com/hakkdevops/takwin/discussions) or check the full [documentation](../index.md).

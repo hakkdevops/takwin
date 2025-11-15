@@ -104,7 +104,7 @@ import (
     "github.com/spf13/cobra"
     
     // Local imports
-    "github.com/hakkim/takwin/internal/config"
+    "github.com/hakkdevops/takwin/internal/config"
 )
 
 // Exported functions have comments

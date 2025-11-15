@@ -34,9 +34,9 @@ We are committed to providing a welcoming and inclusive environment. Please:
 
 If you need help contributing:
 
-- 💬 Ask in [GitHub Discussions](https://github.com/hakkim/takwin/discussions)
+- 💬 Ask in [GitHub Discussions](https://github.com/hakkdevops/takwin/discussions)
 - 📖 Read the [full contributing guide](getting-started.md)
-- 🐛 Check existing [issues](https://github.com/hakkim/takwin/issues)
+- 🐛 Check existing [issues](https://github.com/hakkdevops/takwin/issues)
 
 ## Recognition
 

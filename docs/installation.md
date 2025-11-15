@@ -6,7 +6,7 @@
 
 ```bash
 # Download and install latest version
-curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkdevops/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
 sudo mv takwin-linux-amd64 /usr/local/bin/takwin
 
 # Verify installation
@@ -15,7 +15,7 @@ takwin --version
 
 ### Windows
 
-1. Download `takwin-windows-amd64.zip` from [releases](https://github.com/hakkim/takwin/releases)
+1. Download `takwin-windows-amd64.zip` from [releases](https://github.com/hakkdevops/takwin/releases)
 2. Extract the ZIP file
 3. Add the directory to your PATH
 4. Verify: `takwin --version`
@@ -40,7 +40,7 @@ takwin --version
 #### Ubuntu/Debian
 ```bash
 # Download
-wget https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64.tar.gz
+wget https://github.com/hakkdevops/takwin/releases/latest/download/takwin-linux-amd64.tar.gz
 
 # Extract and install
 tar -xzf takwin-linux-amd64.tar.gz
@@ -54,7 +54,7 @@ takwin --version
 #### CentOS/RHEL/Fedora
 ```bash
 # Download
-curl -L -o takwin-linux-amd64.tar.gz https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64.tar.gz
+curl -L -o takwin-linux-amd64.tar.gz https://github.com/hakkdevops/takwin/releases/latest/download/takwin-linux-amd64.tar.gz
 
 # Extract and install
 tar -xzf takwin-linux-amd64.tar.gz
@@ -68,7 +68,7 @@ sudo chmod +x /usr/local/bin/takwin
 yay -S takwin-bin
 
 # Or manual installation
-curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkdevops/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
 sudo mv takwin-linux-amd64 /usr/local/bin/takwin
 ```
 
@@ -76,13 +76,13 @@ sudo mv takwin-linux-amd64 /usr/local/bin/takwin
 
 #### Intel Macs
 ```bash
-curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-darwin-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkdevops/takwin/releases/latest/download/takwin-darwin-amd64.tar.gz | tar -xz
 sudo mv takwin-darwin-amd64 /usr/local/bin/takwin
 ```
 
 #### Apple Silicon (M1/M2)
 ```bash
-curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-darwin-arm64.tar.gz | tar -xz
+curl -L https://github.com/hakkdevops/takwin/releases/latest/download/takwin-darwin-arm64.tar.gz | tar -xz
 sudo mv takwin-darwin-arm64 /usr/local/bin/takwin
 ```
 
@@ -91,7 +91,7 @@ sudo mv takwin-darwin-arm64 /usr/local/bin/takwin
 #### PowerShell (Recommended)
 ```powershell
 # Download
-Invoke-WebRequest -Uri "https://github.com/hakkim/takwin/releases/latest/download/takwin-windows-amd64.zip" -OutFile "takwin.zip"
+Invoke-WebRequest -Uri "https://github.com/hakkdevops/takwin/releases/latest/download/takwin-windows-amd64.zip" -OutFile "takwin.zip"
 
 # Extract
 Expand-Archive -Path "takwin.zip" -DestinationPath "C:\Program Files\Takwin"
@@ -121,18 +121,18 @@ scoop install takwin
 ### Run with Docker
 ```bash
 # Pull image
-docker pull ghcr.io/hakkim/takwin:latest
+docker pull ghcr.io/hakkdevops/takwin:latest
 
 # Run in current directory
-docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkim/takwin:latest build
+docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkdevops/takwin:latest build
 
 # Create alias for convenience
-alias takwin='docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkim/takwin:latest'
+alias takwin='docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkdevops/takwin:latest'
 ```
 
 ### Dockerfile for CI/CD
 ```dockerfile
-FROM ghcr.io/hakkim/takwin:latest
+FROM ghcr.io/hakkdevops/takwin:latest
 COPY . /workspace
 WORKDIR /workspace
 RUN takwin build
@@ -147,7 +147,7 @@ RUN takwin build
 ### Build Steps
 ```bash
 # Clone repository
-git clone https://github.com/hakkim/takwin.git
+git clone https://github.com/hakkdevops/takwin.git
 cd takwin
 
 # Build
@@ -157,13 +157,13 @@ go build -o takwin main.go
 sudo mv takwin /usr/local/bin/
 
 # Or install with go install
-go install github.com/hakkim/takwin@latest
+go install github.com/hakkdevops/takwin@latest
 ```
 
 ### Development Build
 ```bash
 # Clone and build
-git clone https://github.com/hakkim/takwin.git
+git clone https://github.com/hakkdevops/takwin.git
 cd takwin
 
 # Install dependencies
@@ -260,14 +260,14 @@ chmod +x /usr/local/bin/takwin
 sudo apt-get update && sudo apt-get install ca-certificates
 
 # Use insecure download (not recommended)
-curl -k -L https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64.tar.gz
+curl -k -L https://github.com/hakkdevops/takwin/releases/latest/download/takwin-linux-amd64.tar.gz
 ```
 
 ### Getting Help
 
-- **GitHub Issues**: https://github.com/hakkim/takwin/issues
-- **Discussions**: https://github.com/hakkim/takwin/discussions
-- **Documentation**: https://github.com/hakkim/takwin/docs
+- **GitHub Issues**: https://github.com/hakkdevops/takwin/issues
+- **Discussions**: https://github.com/hakkdevops/takwin/discussions
+- **Documentation**: https://github.com/hakkdevops/takwin/docs
 
 ## Uninstallation
 

@@ -255,8 +255,8 @@ We use the following tools for security:
 ## 📞 Contact Information
 
 - **Security Email**: security@takwin.dev
-- **General Issues**: [GitHub Issues](https://github.com/hakkim/takwin/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/hakkim/takwin/discussions)
+- **General Issues**: [GitHub Issues](https://github.com/hakkdevops/takwin/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/hakkdevops/takwin/discussions)
 
 ## 🙏 Acknowledgments
 

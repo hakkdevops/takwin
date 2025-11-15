@@ -95,7 +95,7 @@ After pushing the tag, the GitHub Actions workflow will automatically:
 6. ✅ Build and push Docker images
 
 **Monitor the workflow:**
-- Go to: https://github.com/hakkim/takwin/actions
+- Go to: https://github.com/hakkdevops/takwin/actions
 - Check the "Release" workflow
 - Ensure all jobs complete successfully
 
@@ -104,14 +104,14 @@ After pushing the tag, the GitHub Actions workflow will automatically:
 Once the workflow completes:
 
 1. **Check GitHub Release:**
-   - Go to: https://github.com/hakkim/takwin/releases
+   - Go to: https://github.com/hakkdevops/takwin/releases
    - Verify the beta release is marked as "Pre-release"
    - Check all binaries are uploaded
 
 2. **Test Download:**
    ```bash
    # Test Linux binary
-   curl -L https://github.com/hakkim/takwin/releases/download/v0.1.0-beta.1/takwin-linux-amd64.tar.gz | tar -xz
+   curl -L https://github.com/hakkdevops/takwin/releases/download/v0.1.0-beta.1/takwin-linux-amd64.tar.gz | tar -xz
    ./takwin-linux-amd64 --version
    
    # Test Windows binary
@@ -121,7 +121,7 @@ Once the workflow completes:
 3. **Verify Checksums:**
    ```bash
    # Download checksums
-   curl -L https://github.com/hakkim/takwin/releases/download/v0.1.0-beta.1/checksums.txt
+   curl -L https://github.com/hakkdevops/takwin/releases/download/v0.1.0-beta.1/checksums.txt
    
    # Verify
    sha256sum -c checksums.txt

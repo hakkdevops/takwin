@@ -1,16 +1,16 @@
 # Takwin
 
-<div align="center">
+<p align="center">
+  <strong>Modern, lightning-fast build tool for C and C++ projects</strong>
+</p>
 
-**Modern, lightning-fast build tool for C and C++ projects**
-
-[![CI Pipeline](https://github.com/hakkim/takwin/actions/workflows/ci.yml/badge.svg)](https://github.com/hakkim/takwin/actions/workflows/ci.yml)
-[![Release](https://github.com/hakkim/takwin/actions/workflows/release.yml/badge.svg)](https://github.com/hakkim/takwin/actions/workflows/release.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/hakkim/takwin)](https://goreportcard.com/report/github.com/hakkim/takwin)
-[![GitHub release](https://img.shields.io/github/release/hakkim/takwin.svg)](https://github.com/hakkim/takwin/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-</div>
+<p align="center">
+  <a href="https://github.com/hakkdevops/takwin/actions/workflows/ci.yml"><img src="https://github.com/hakkdevops/takwin/actions/workflows/ci.yml/badge.svg" alt="CI Pipeline"></a>
+  <a href="https://github.com/hakkdevops/takwin/actions/workflows/release.yml"><img src="https://github.com/hakkdevops/takwin/actions/workflows/release.yml/badge.svg" alt="Release"></a>
+  <a href="https://goreportcard.com/report/github.com/hakkdevops/takwin"><img src="https://goreportcard.com/badge/github.com/hakkdevops/takwin" alt="Go Report Card"></a>
+  <a href="https://github.com/hakkdevops/takwin/releases"><img src="https://img.shields.io/github/release/hakkdevops/takwin.svg" alt="GitHub release"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+</p>
 
 ---
 
@@ -29,7 +29,7 @@
 
     ```bash
     # Download and install
-    curl -L https://github.com/hakkim/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
+    curl -L https://github.com/hakkdevops/takwin/releases/latest/download/takwin-linux-amd64.tar.gz | tar -xz
     sudo mv takwin-linux-amd64 /usr/local/bin/takwin
     
     # Verify installation
@@ -40,7 +40,7 @@
 
     ```powershell
     # Download from releases
-    Invoke-WebRequest -Uri "https://github.com/hakkim/takwin/releases/latest/download/takwin-windows-amd64.zip" -OutFile "takwin.zip"
+    Invoke-WebRequest -Uri "https://github.com/hakkdevops/takwin/releases/latest/download/takwin-windows-amd64.zip" -OutFile "takwin.zip"
     Expand-Archive -Path "takwin.zip" -DestinationPath "C:\Program Files\Takwin"
     
     # Add to PATH and verify
@@ -51,10 +51,10 @@
 
     ```bash
     # Pull the image
-    docker pull ghcr.io/hakkim/takwin:latest
+    docker pull ghcr.io/hakkdevops/takwin:latest
     
     # Run in current directory
-    docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkim/takwin:latest build
+    docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkdevops/takwin:latest build
     ```
 
 ## Your First Build
@@ -168,8 +168,8 @@ takwin build
 
 ## Community & Support
 
-- **GitHub Issues**: [Report bugs or request features](https://github.com/hakkim/takwin/issues)
-- **Discussions**: [Ask questions and share ideas](https://github.com/hakkim/takwin/discussions)
+- **GitHub Issues**: [Report bugs or request features](https://github.com/hakkdevops/takwin/issues)
+- **Discussions**: [Ask questions and share ideas](https://github.com/hakkdevops/takwin/discussions)
 - **Contributing**: [Learn how to contribute](CONTRIBUTING.md)
 
 ## License
