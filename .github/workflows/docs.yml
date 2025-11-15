@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - 'feature/**'
     tags:
       - 'v*'
     paths:
@@ -58,6 +59,39 @@ jobs:
 
       - name: Build documentation
         run: mkdocs build
+
+      - name: Upload documentation artifact (for PRs and feature branches)
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/feature/'))
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation-preview
+          path: site/
+          retention-days: 30
+
+      - name: Deploy to GitHub Pages (for PRs and feature branches)
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/feature/'))
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          destination_dir: preview/${{ github.head_ref || github.ref_name }}
+          keep_files: false
+
+      - name: Comment PR with preview link
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const branchName = context.payload.pull_request.head.ref;
+            const previewUrl = `https://${context.repo.owner}.github.io/${context.repo.repo}/preview/${branchName}/`;
+            
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `📚 **Documentation Preview**\n\nYour documentation changes are ready for review:\n${previewUrl}\n\n_This preview will be available for 30 days._`
+            });
 
       - name: Deploy development docs
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
