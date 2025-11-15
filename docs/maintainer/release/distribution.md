@@ -6,7 +6,7 @@ When you create a release tag (e.g., `v0.1.0-beta.1`), your product will be auto
 
 ## 1. 🐙 GitHub Releases (Primary)
 
-**Location:** https://github.com/hakkim/takwin/releases
+**Location:** https://github.com/hakkdevops/takwin/releases
 
 **What Gets Published:**
 - ✅ Release binaries for all platforms:
@@ -26,7 +26,7 @@ When you create a release tag (e.g., `v0.1.0-beta.1`), your product will be auto
 **Users Can Download:**
 ```bash
 # Direct download
-curl -L https://github.com/hakkim/takwin/releases/download/v0.1.0-beta.1/takwin-linux-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkdevops/takwin/releases/download/v0.1.0-beta.1/takwin-linux-amd64.tar.gz | tar -xz
 
 # Or browse and download from web interface
 ```
@@ -35,24 +35,24 @@ curl -L https://github.com/hakkim/takwin/releases/download/v0.1.0-beta.1/takwin-
 
 ## 2. 🐳 GitHub Container Registry (Docker)
 
-**Location:** https://github.com/hakkim/takwin/packages
+**Location:** https://github.com/hakkdevops/takwin/packages
 
 **What Gets Published:**
 - ✅ Docker images for multiple architectures:
-  - `ghcr.io/hakkim/takwin:v0.1.0-beta.1` (version tag)
-  - `ghcr.io/hakkim/takwin:latest` (latest tag)
+  - `ghcr.io/hakkdevops/takwin:v0.1.0-beta.1` (version tag)
+  - `ghcr.io/hakkdevops/takwin:latest` (latest tag)
 - ✅ Multi-arch support (linux/amd64, linux/arm64)
 
 **Users Can Use:**
 ```bash
 # Pull the image
-docker pull ghcr.io/hakkim/takwin:v0.1.0-beta.1
+docker pull ghcr.io/hakkdevops/takwin:v0.1.0-beta.1
 
 # Or use latest
-docker pull ghcr.io/hakkim/takwin:latest
+docker pull ghcr.io/hakkdevops/takwin:latest
 
 # Run in current directory
-docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkim/takwin:latest build
+docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkdevops/takwin:latest build
 ```
 
 ---
@@ -83,7 +83,7 @@ brew upgrade takwin
 
 ## 4. 📦 Go Package Registry
 
-**Location:** https://pkg.go.dev/github.com/hakkim/takwin
+**Location:** https://pkg.go.dev/github.com/hakkdevops/takwin
 
 **What Gets Published:**
 - ✅ Go module documentation
@@ -93,10 +93,10 @@ brew upgrade takwin
 **Developers Can Install:**
 ```bash
 # Install as a Go tool
-go install github.com/hakkim/takwin@latest
+go install github.com/hakkdevops/takwin@latest
 
 # Or specific version
-go install github.com/hakkim/takwin@v0.1.0-beta.1
+go install github.com/hakkdevops/takwin@v0.1.0-beta.1
 ```
 
 ---
@@ -160,11 +160,11 @@ When you push a tag, here's what happens automatically:
 ### Method 1: Direct Download (Recommended for Beta)
 ```bash
 # Linux
-curl -L https://github.com/hakkim/takwin/releases/download/v0.1.0-beta.1/takwin-linux-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkdevops/takwin/releases/download/v0.1.0-beta.1/takwin-linux-amd64.tar.gz | tar -xz
 sudo mv takwin-linux-amd64 /usr/local/bin/takwin
 
 # macOS
-curl -L https://github.com/hakkim/takwin/releases/download/v0.1.0-beta.1/takwin-darwin-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkdevops/takwin/releases/download/v0.1.0-beta.1/takwin-darwin-amd64.tar.gz | tar -xz
 sudo mv takwin-darwin-amd64 /usr/local/bin/takwin
 
 # Windows
@@ -174,20 +174,20 @@ sudo mv takwin-darwin-amd64 /usr/local/bin/takwin
 ### Method 2: Docker
 ```bash
 # Pull and run
-docker pull ghcr.io/hakkim/takwin:v0.1.0-beta.1
-docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkim/takwin:v0.1.0-beta.1 build
+docker pull ghcr.io/hakkdevops/takwin:v0.1.0-beta.1
+docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkdevops/takwin:v0.1.0-beta.1 build
 
 # Create alias
-alias takwin='docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkim/takwin:latest'
+alias takwin='docker run --rm -v $(pwd):/workspace -w /workspace ghcr.io/hakkdevops/takwin:latest'
 ```
 
 ### Method 3: Go Install
 ```bash
 # Install latest
-go install github.com/hakkim/takwin@latest
+go install github.com/hakkdevops/takwin@latest
 
 # Install specific version
-go install github.com/hakkim/takwin@v0.1.0-beta.1
+go install github.com/hakkdevops/takwin@v0.1.0-beta.1
 ```
 
 ### Method 4: Homebrew (Stable Only)
@@ -202,7 +202,7 @@ brew install takwin
 ## Monitoring Your Release
 
 ### 1. GitHub Actions
-**URL:** https://github.com/hakkim/takwin/actions
+**URL:** https://github.com/hakkdevops/takwin/actions
 
 Watch the "Release" workflow to ensure:
 - ✅ Tests pass
@@ -211,7 +211,7 @@ Watch the "Release" workflow to ensure:
 - ✅ Release is created
 
 ### 2. GitHub Releases
-**URL:** https://github.com/hakkim/takwin/releases
+**URL:** https://github.com/hakkdevops/takwin/releases
 
 Verify:
 - ✅ All binaries are uploaded
@@ -220,7 +220,7 @@ Verify:
 - ✅ Pre-release badge (for beta)
 
 ### 3. GitHub Packages
-**URL:** https://github.com/hakkim/takwin/packages
+**URL:** https://github.com/hakkdevops/takwin/packages
 
 Check:
 - ✅ Docker image is published
@@ -228,7 +228,7 @@ Check:
 - ✅ Multi-arch support
 
 ### 4. Download Statistics
-**URL:** https://github.com/hakkim/takwin/releases
+**URL:** https://github.com/hakkdevops/takwin/releases
 
 GitHub provides download counts for each binary.
 
@@ -250,8 +250,8 @@ checksums.txt                  (~1KB)
 
 ### Docker Images
 ```
-ghcr.io/hakkim/takwin:v0.1.0-beta.1
-ghcr.io/hakkim/takwin:latest
+ghcr.io/hakkdevops/takwin:v0.1.0-beta.1
+ghcr.io/hakkdevops/takwin:latest
 ```
 
 ### Source Code
@@ -268,7 +268,7 @@ Source code (tar.gz)
 Users can verify downloads:
 ```bash
 # Download checksums
-curl -L https://github.com/hakkim/takwin/releases/download/v0.1.0-beta.1/checksums.txt
+curl -L https://github.com/hakkdevops/takwin/releases/download/v0.1.0-beta.1/checksums.txt
 
 # Verify
 sha256sum -c checksums.txt
@@ -277,10 +277,10 @@ sha256sum -c checksums.txt
 ### Docker Image Verification
 ```bash
 # Inspect image
-docker inspect ghcr.io/hakkim/takwin:v0.1.0-beta.1
+docker inspect ghcr.io/hakkdevops/takwin:v0.1.0-beta.1
 
 # Check labels
-docker inspect ghcr.io/hakkim/takwin:v0.1.0-beta.1 | grep -A 10 Labels
+docker inspect ghcr.io/hakkdevops/takwin:v0.1.0-beta.1 | grep -A 10 Labels
 ```
 
 ---
@@ -298,7 +298,7 @@ After release is published:
 ### 2. README Badge
 Update README.md with latest release badge:
 ```markdown
-[![GitHub release](https://img.shields.io/github/release/hakkim/takwin.svg)](https://github.com/hakkim/takwin/releases)
+[![GitHub release](https://img.shields.io/github/release/hakkdevops/takwin.svg)](https://github.com/hakkdevops/takwin/releases)
 ```
 
 ### 3. Social Media (Optional)
@@ -345,19 +345,19 @@ git push origin v0.1.0-beta.1
 ### Monitor Release
 ```bash
 # Watch workflow
-https://github.com/hakkim/takwin/actions
+https://github.com/hakkdevops/takwin/actions
 
 # Check release
-https://github.com/hakkim/takwin/releases
+https://github.com/hakkdevops/takwin/releases
 
 # Verify Docker
-docker pull ghcr.io/hakkim/takwin:v0.1.0-beta.1
+docker pull ghcr.io/hakkdevops/takwin:v0.1.0-beta.1
 ```
 
 ### Test Installation
 ```bash
 # Download and test
-curl -L https://github.com/hakkim/takwin/releases/download/v0.1.0-beta.1/takwin-linux-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkdevops/takwin/releases/download/v0.1.0-beta.1/takwin-linux-amd64.tar.gz | tar -xz
 ./takwin-linux-amd64 --version
 ```
 

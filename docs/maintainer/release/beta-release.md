@@ -41,12 +41,12 @@ git push origin v0.1.0-beta.1
 ```
 
 ### 3. Monitor Workflow
-- [ ] Go to https://github.com/hakkim/takwin/actions
+- [ ] Go to https://github.com/hakkdevops/takwin/actions
 - [ ] Watch "Release" workflow
 - [ ] Ensure all jobs pass (test, build, docker)
 
 ### 4. Verify Release
-- [ ] Check https://github.com/hakkim/takwin/releases
+- [ ] Check https://github.com/hakkdevops/takwin/releases
 - [ ] Verify "Pre-release" badge is shown
 - [ ] Check all binaries are uploaded:
   - [ ] takwin-linux-amd64.tar.gz
@@ -59,7 +59,7 @@ git push origin v0.1.0-beta.1
 ### 5. Test Downloads
 ```bash
 # Test Linux binary
-curl -L https://github.com/hakkim/takwin/releases/download/v0.1.0-beta.1/takwin-linux-amd64.tar.gz | tar -xz
+curl -L https://github.com/hakkdevops/takwin/releases/download/v0.1.0-beta.1/takwin-linux-amd64.tar.gz | tar -xz
 ./takwin-linux-amd64 --version
 ./takwin-linux-amd64 --help
 ```
@@ -70,7 +70,7 @@ curl -L https://github.com/hakkim/takwin/releases/download/v0.1.0-beta.1/takwin-
 
 ### 6. Verify Checksums
 ```bash
-curl -L https://github.com/hakkim/takwin/releases/download/v0.1.0-beta.1/checksums.txt
+curl -L https://github.com/hakkdevops/takwin/releases/download/v0.1.0-beta.1/checksums.txt
 sha256sum -c checksums.txt
 ```
 
@@ -115,4 +115,4 @@ If all pre-release checks pass, run:
 git tag -a v0.1.0-beta.1 -m "Release v0.1.0-beta.1" && git push origin v0.1.0-beta.1
 ```
 
-Then monitor: https://github.com/hakkim/takwin/actions
+Then monitor: https://github.com/hakkdevops/takwin/actions

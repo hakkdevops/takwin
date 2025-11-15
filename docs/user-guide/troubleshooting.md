@@ -204,11 +204,11 @@ If you can't find a solution:
    - [CLI Reference](cli.md)
 
 2. **Search Issues**
-   - [GitHub Issues](https://github.com/hakkim/takwin/issues)
+   - [GitHub Issues](https://github.com/hakkdevops/takwin/issues)
    - Search for similar problems
 
 3. **Ask for Help**
-   - [GitHub Discussions](https://github.com/hakkim/takwin/discussions)
+   - [GitHub Discussions](https://github.com/hakkdevops/takwin/discussions)
    - Provide:
      - Takwin version (`takwin --version`)
      - Operating system
@@ -217,7 +217,7 @@ If you can't find a solution:
      - Error messages
 
 4. **Report a Bug**
-   - [Create an Issue](https://github.com/hakkim/takwin/issues/new)
+   - [Create an Issue](https://github.com/hakkdevops/takwin/issues/new)
    - Include reproduction steps
    - Attach relevant files
 
@@ -261,6 +261,6 @@ version = "1.0.0"
 ## Still Having Issues?
 
 Contact us:
-- **GitHub Issues**: https://github.com/hakkim/takwin/issues
-- **Discussions**: https://github.com/hakkim/takwin/discussions
+- **GitHub Issues**: https://github.com/hakkdevops/takwin/issues
+- **Discussions**: https://github.com/hakkdevops/takwin/discussions
 - **Email**: support@takwin.dev (if available)

@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - 'feature/**'
+      - 'hotfix/**'
     tags:
       - 'v*'
     paths:
@@ -22,6 +23,10 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+
+concurrency:
+  group: docs-deploy-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -59,11 +64,41 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      - name: Build documentation
-        run: mkdocs build
+      - name: Determine branch name
+        id: branch
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BRANCH_NAME="${{ github.head_ref }}"
+          else
+            BRANCH_NAME="${{ github.ref_name }}"
+          fi
+          # Replace slashes with hyphens for URL-safe path
+          SAFE_BRANCH=$(echo "$BRANCH_NAME" | sed 's/\//-/g')
+          echo "name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          echo "safe=$SAFE_BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Build documentation for preview
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && (startsWith(github.ref, 'refs/heads/feature/') || startsWith(github.ref, 'refs/heads/hotfix/')))
+        run: |
+          # Configure for subdirectory deployment
+          REPO_NAME="${{ github.event.repository.name }}"
+          SAFE_BRANCH="${{ steps.branch.outputs.safe }}"
+          
+          # Update mkdocs.yml for preview deployment
+          sed -i "s|site_url:.*|site_url: https://${{ github.repository_owner }}.github.io/${REPO_NAME}/preview/${SAFE_BRANCH}/|" mkdocs.yml
+          
+          # Build with correct base path
+          mkdocs build --site-dir site
+          touch site/.nojekyll
+
+      - name: Build documentation for main/tags
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
+        run: |
+          mkdocs build
+          touch site/.nojekyll
 
       - name: Upload documentation artifact (for PRs and feature branches)
-        if: github.event_name == 'pull_request' || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/feature/'))
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && (startsWith(github.ref, 'refs/heads/feature/') || startsWith(github.ref, 'refs/heads/hotfix/')))
         uses: actions/upload-artifact@v4
         with:
           name: documentation-preview
@@ -71,13 +106,14 @@ jobs:
           retention-days: 30
 
       - name: Deploy to GitHub Pages (for PRs and feature branches)
-        if: github.event_name == 'pull_request' || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/feature/'))
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && (startsWith(github.ref, 'refs/heads/feature/') || startsWith(github.ref, 'refs/heads/hotfix/')))
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
-          destination_dir: preview/${{ github.head_ref || github.ref_name }}
-          keep_files: false
+          destination_dir: preview/${{ steps.branch.outputs.safe }}
+          keep_files: true
+          force_orphan: false
 
       - name: Comment PR with preview link
         if: github.event_name == 'pull_request'
@@ -86,7 +122,8 @@ jobs:
           script: |
             const prNumber = context.issue.number;
             const branchName = context.payload.pull_request.head.ref;
-            const previewUrl = `https://${context.repo.owner}.github.io/${context.repo.repo}/preview/${branchName}/`;
+            const safeBranchName = branchName.replace(/\//g, '-');
+            const previewUrl = `https://${context.repo.owner}.github.io/${context.repo.repo}/preview/${safeBranchName}/`;
             
             github.rest.issues.createComment({
               issue_number: prNumber,
@@ -99,7 +136,15 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           mike deploy --push --update-aliases dev development
-          mike set-default --push latest
+          mike set-default --push dev
+          
+          # Add .nojekyll at root to prevent Jekyll processing
+          git fetch origin gh-pages
+          git checkout gh-pages
+          touch .nojekyll
+          git add .nojekyll
+          git commit -m "Add .nojekyll to prevent Jekyll processing" || true
+          git push origin gh-pages
 
       - name: Deploy versioned docs
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
