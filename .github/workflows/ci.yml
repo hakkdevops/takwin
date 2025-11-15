@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+permissions:
+  contents: read
+  security-events: write
+
 env:
   GO_VERSION: '1.23'
 
@@ -91,7 +95,7 @@ jobs:
       continue-on-error: true
 
     - name: Upload Gosec results to GitHub Security
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@v4
       if: always() && hashFiles('gosec.sarif') != ''
       with:
         sarif_file: gosec.sarif
