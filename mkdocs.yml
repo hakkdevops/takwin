@@ -7,7 +7,7 @@ repo_name: hakkdevops/takwin
 edit_uri: edit/main/docs/
 use_directory_urls: true
 
-copyright: Copyright &copy; 2024-2025 Hakkim
+copyright: Copyright &copy; 2024-2026 Hakkim
 
 theme:
   name: material
