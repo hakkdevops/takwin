@@ -45,12 +45,6 @@ jobs:
       with:
         go-version: ${{ env.GO_VERSION }}
 
-    - name: Tidy dependencies
-      run: go mod tidy
-
-    - name: Download dependencies
-      run: go mod download
-
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v3
       with:
@@ -79,12 +73,6 @@ jobs:
           ~/go/pkg/mod
         key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
 
-    - name: Tidy dependencies
-      run: go mod tidy
-
-    - name: Download dependencies
-      run: go mod download
-
     - name: Run tests with coverage
       run: go test -race -coverprofile=coverage.out -covermode=atomic ./...
 
@@ -109,9 +97,6 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: ${{ env.GO_VERSION }}
-
-    - name: Tidy dependencies
-      run: go mod tidy
 
     - name: Build
       run: go build -o takwin main.go
@@ -141,9 +126,6 @@ jobs:
       with:
         go-version: ${{ env.GO_VERSION }}
 
-    - name: Tidy dependencies
-      run: go mod tidy
-
     - name: Run Gosec Security Scanner
       run: |
         go install github.com/securego/gosec/v2/cmd/gosec@latest
@@ -151,8 +133,8 @@ jobs:
       continue-on-error: true
 
     - name: Upload Gosec results
-      uses: github/codeql-action/upload-sarif@v2
-      if: always()
+      uses: github/codeql-action/upload-sarif@v3
+      if: always() && hashFiles('gosec.sarif') != ''
       with:
         sarif_file: gosec.sarif
 
@@ -168,9 +150,6 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: ${{ env.GO_VERSION }}
-
-    - name: Tidy dependencies
-      run: go mod tidy
 
     - name: Check for vulnerabilities
       run: |

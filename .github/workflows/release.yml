@@ -24,12 +24,6 @@ jobs:
       with:
         go-version: ${{ env.GO_VERSION }}
 
-    - name: Tidy dependencies
-      run: go mod tidy
-
-    - name: Download dependencies
-      run: go mod download
-
     - name: Run tests
       run: go test -race ./...
 
@@ -46,12 +40,6 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: ${{ env.GO_VERSION }}
-
-    - name: Tidy dependencies
-      run: go mod tidy
-
-    - name: Download dependencies
-      run: go mod download
 
     - name: Get version from tag
       id: version
