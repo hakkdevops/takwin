@@ -1,4 +1,4 @@
-module github.com/hakkim/takwin
+module github.com/hakkdevops/takwin
 
 go 1.22
 

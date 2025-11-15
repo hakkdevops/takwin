@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/hakkim/takwin/cmd"
+	"github.com/hakkdevops/takwin/cmd"
 )
 
 func main() {
