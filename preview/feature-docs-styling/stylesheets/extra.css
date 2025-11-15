@@ -1,0 +1,78 @@
+/* Takwin Brand Colors */
+:root {
+  --takwin-blue: #0098F9;
+  --takwin-deep-blue: #0059C9;
+  --takwin-cyan: #00E4FF;
+  --takwin-gradient-start: #00CFFF;
+  --takwin-gradient-end: #0059C9;
+}
+
+/* Light mode custom colors */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: var(--takwin-blue);
+  --md-primary-fg-color--light: var(--takwin-gradient-start);
+  --md-primary-fg-color--dark: var(--takwin-deep-blue);
+  --md-accent-fg-color: var(--takwin-cyan);
+  --md-accent-fg-color--transparent: rgba(0, 228, 255, 0.1);
+}
+
+/* Dark mode custom colors */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: var(--takwin-blue);
+  --md-primary-fg-color--light: var(--takwin-gradient-start);
+  --md-primary-fg-color--dark: var(--takwin-deep-blue);
+  --md-accent-fg-color: var(--takwin-cyan);
+  --md-accent-fg-color--transparent: rgba(0, 228, 255, 0.1);
+}
+
+/* Gradient header effect */
+.md-header {
+  background: linear-gradient(135deg, var(--takwin-gradient-start) 0%, var(--takwin-gradient-end) 100%);
+}
+
+/* Links with brand color */
+.md-typeset a {
+  color: var(--takwin-blue);
+}
+
+.md-typeset a:hover {
+  color: var(--takwin-deep-blue);
+}
+
+/* Code blocks accent */
+.md-typeset code {
+  background-color: rgba(0, 152, 249, 0.1);
+  border-radius: 0.2rem;
+}
+
+/* Buttons with gradient */
+.md-button--primary {
+  background: linear-gradient(135deg, var(--takwin-gradient-start) 0%, var(--takwin-gradient-end) 100%);
+  border: none;
+}
+
+/* Search highlight */
+.md-search-result__article--document:hover {
+  background-color: rgba(0, 152, 249, 0.05);
+}
+
+/* Navigation active item */
+.md-nav__link--active {
+  color: var(--takwin-blue);
+}
+
+/* Admonition colors */
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-color: var(--takwin-blue);
+}
+
+.md-typeset .note > .admonition-title,
+.md-typeset .note > summary {
+  background-color: rgba(0, 152, 249, 0.1);
+}
+
+.md-typeset .note > .admonition-title::before,
+.md-typeset .note > summary::before {
+  background-color: var(--takwin-blue);
+}
