@@ -37,14 +37,16 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-go-${{ matrix.go-version }}-
 
-    - name: Verify dependencies
-      run: go mod verify
+    - name: Prepare dependencies
+      run: |
+        go mod download
+        go mod verify
 
     - name: Run tests
       run: go test -race -coverprofile=coverage.out -covermode=atomic ./...
 
     - name: Upload coverage to Codecov
-      if: matrix.os == 'ubuntu-latest' && matrix.go-version == '1.21'
+      if: matrix.os == 'ubuntu-latest' && matrix.go-version == '1.22'
       uses: codecov/codecov-action@v3
       with:
         file: ./coverage.out
@@ -64,6 +66,11 @@ jobs:
       with:
         go-version: ${{ env.GO_VERSION }}
 
+    - name: Tidy and download dependencies
+      run: |
+        go mod download
+        go mod verify
+
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v3
       with:
@@ -82,6 +89,10 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: ${{ env.GO_VERSION }}
+
+    - name: Prepare dependencies
+      run: |
+        go mod download
 
     - name: Run Gosec Security Scanner
       run: |
