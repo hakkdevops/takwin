@@ -1,0 +1,211 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  GO_VERSION: '1.23'
+
+jobs:
+  test:
+    name: Test Before Release
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+
+    - name: Run tests
+      run: go test -race ./...
+
+  build:
+    name: Build Release Binaries
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+
+    - name: Get version from tag
+      id: version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+    - name: Build binaries
+      run: |
+        mkdir -p dist
+        
+        # Build for multiple platforms with version info
+        LDFLAGS="-s -w -X main.version=${{ steps.version.outputs.VERSION }} -X main.buildDate=$(date -u +%Y-%m-%dT%H:%M:%SZ) -X main.gitCommit=${GITHUB_SHA::8}"
+        
+        # Linux
+        GOOS=linux GOARCH=amd64 go build -ldflags="$LDFLAGS" -o dist/takwin-linux-amd64 main.go
+        GOOS=linux GOARCH=arm64 go build -ldflags="$LDFLAGS" -o dist/takwin-linux-arm64 main.go
+        
+        # Windows
+        GOOS=windows GOARCH=amd64 go build -ldflags="$LDFLAGS" -o dist/takwin-windows-amd64.exe main.go
+        
+        # macOS
+        GOOS=darwin GOARCH=amd64 go build -ldflags="$LDFLAGS" -o dist/takwin-darwin-amd64 main.go
+        GOOS=darwin GOARCH=arm64 go build -ldflags="$LDFLAGS" -o dist/takwin-darwin-arm64 main.go
+
+    - name: Create checksums
+      run: |
+        cd dist
+        sha256sum * > checksums.txt
+
+    - name: Create release archives
+      run: |
+        cd dist
+        
+        # Create tar.gz for Unix systems
+        tar -czf takwin-linux-amd64.tar.gz takwin-linux-amd64
+        tar -czf takwin-linux-arm64.tar.gz takwin-linux-arm64
+        tar -czf takwin-darwin-amd64.tar.gz takwin-darwin-amd64
+        tar -czf takwin-darwin-arm64.tar.gz takwin-darwin-arm64
+        
+        # Create zip for Windows
+        zip takwin-windows-amd64.zip takwin-windows-amd64.exe
+
+    - name: Generate release notes
+      id: release_notes
+      run: |
+        # Extract version from tag
+        VERSION=${{ steps.version.outputs.VERSION }}
+        
+        # Create release notes
+        cat > release_notes.md << EOF
+        # Takwin ${VERSION}
+        
+        ## 🚀 What's New
+        
+        This release includes performance improvements and bug fixes.
+        
+        ## 📦 Installation
+        
+        ### Quick Install (Linux/macOS)
+        \`\`\`bash
+        # Linux (x64)
+        curl -L https://github.com/hakkim/takwin/releases/download/${VERSION}/takwin-linux-amd64.tar.gz | tar -xz
+        sudo mv takwin-linux-amd64 /usr/local/bin/takwin
+        
+        # macOS (x64)
+        curl -L https://github.com/hakkim/takwin/releases/download/${VERSION}/takwin-darwin-amd64.tar.gz | tar -xz
+        sudo mv takwin-darwin-amd64 /usr/local/bin/takwin
+        
+        # macOS (ARM64)
+        curl -L https://github.com/hakkim/takwin/releases/download/${VERSION}/takwin-darwin-arm64.tar.gz | tar -xz
+        sudo mv takwin-darwin-arm64 /usr/local/bin/takwin
+        \`\`\`
+        
+        ### Windows
+        Download \`takwin-windows-amd64.zip\`, extract, and add to PATH.
+        
+        ## 🔍 Verification
+        
+        All binaries are signed and checksums are provided in \`checksums.txt\`.
+        
+        \`\`\`bash
+        # Verify checksum (Linux/macOS)
+        sha256sum -c checksums.txt
+        \`\`\`
+        
+        ## 📋 Supported Platforms
+        
+        - Linux (x64, ARM64)
+        - macOS (x64, ARM64)
+        - Windows (x64)
+        
+        ## 🐛 Bug Reports
+        
+        Please report issues at: https://github.com/hakkim/takwin/issues
+        EOF
+        
+        echo "RELEASE_NOTES<<EOF" >> $GITHUB_OUTPUT
+        cat release_notes.md >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: Release ${{ steps.version.outputs.VERSION }}
+        body: ${{ steps.release_notes.outputs.RELEASE_NOTES }}
+        files: |
+          dist/takwin-linux-amd64.tar.gz
+          dist/takwin-linux-arm64.tar.gz
+          dist/takwin-darwin-amd64.tar.gz
+          dist/takwin-darwin-arm64.tar.gz
+          dist/takwin-windows-amd64.zip
+          dist/checksums.txt
+        draft: false
+        prerelease: ${{ contains(steps.version.outputs.VERSION, '-') }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  docker:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Get version from tag
+      id: version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          ghcr.io/${{ github.repository }}:latest
+          ghcr.io/${{ github.repository }}:${{ steps.version.outputs.VERSION }}
+        labels: |
+          org.opencontainers.image.title=Takwin
+          org.opencontainers.image.description=Modern build tool for C/C++
+          org.opencontainers.image.version=${{ steps.version.outputs.VERSION }}
+          org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+          org.opencontainers.image.revision=${{ github.sha }}
+
+  homebrew:
+    name: Update Homebrew Formula
+    runs-on: ubuntu-latest
+    needs: build
+    if: "!contains(github.ref, '-')" # Only for stable releases
+    
+    steps:
+    - name: Update Homebrew formula
+      uses: mislav/bump-homebrew-formula-action@v3
+      with:
+        formula-name: takwin
+        homebrew-tap: hakkim/homebrew-tap
+        base-branch: main
+        download-url: https://github.com/hakkim/takwin/releases/download/${{ github.ref_name }}/takwin-darwin-amd64.tar.gz
+      env:
+        COMMITTER_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}

@@ -1,0 +1,13 @@
+[project]
+name = "hello_world"
+version = "1.0.0"
+
+[build]
+compiler = "gcc"
+optimization = "O2"
+output_dir = "build"
+
+[[targets]]
+name = "hello"
+type = "executable"
+sources = ["main.cpp"]
