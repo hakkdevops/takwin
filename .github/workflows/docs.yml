@@ -99,7 +99,7 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           mike deploy --push --update-aliases dev development
-          mike set-default --push latest
+          mike set-default --push dev
 
       - name: Deploy versioned docs
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
