@@ -60,6 +60,19 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
+      - name: Determine branch name
+        id: branch
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BRANCH_NAME="${{ github.head_ref }}"
+          else
+            BRANCH_NAME="${{ github.ref_name }}"
+          fi
+          # Replace slashes with hyphens for URL-safe path
+          SAFE_BRANCH=$(echo "$BRANCH_NAME" | sed 's/\//-/g')
+          echo "name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          echo "safe=$SAFE_BRANCH" >> $GITHUB_OUTPUT
+
       - name: Build documentation
         run: |
           mkdocs build
@@ -79,7 +92,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
-          destination_dir: preview/${{ github.head_ref || github.ref_name }}
+          destination_dir: preview/${{ steps.branch.outputs.safe }}
           keep_files: false
 
       - name: Comment PR with preview link
@@ -89,7 +102,8 @@ jobs:
           script: |
             const prNumber = context.issue.number;
             const branchName = context.payload.pull_request.head.ref;
-            const previewUrl = `https://${context.repo.owner}.github.io/${context.repo.repo}/preview/${branchName}/`;
+            const safeBranchName = branchName.replace(/\//g, '-');
+            const previewUrl = `https://${context.repo.owner}.github.io/${context.repo.repo}/preview/${safeBranchName}/`;
             
             github.rest.issues.createComment({
               issue_number: prNumber,
