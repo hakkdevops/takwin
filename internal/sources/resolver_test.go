@@ -26,15 +26,19 @@ func TestGlobResolver(t *testing.T) {
 
 	for _, file := range files {
 		path := filepath.Join(tmpDir, file)
-		err := os.WriteFile(path, []byte("test content"), 0644)
-		require.NoError(t, err)
+		writeErr := os.WriteFile(path, []byte("test content"), 0600)
+		require.NoError(t, writeErr)
 	}
 
 	// Change to temp directory for relative path testing
 	oldWd, err := os.Getwd()
 	require.NoError(t, err)
-	defer os.Chdir(oldWd)
-	os.Chdir(tmpDir)
+	defer func() {
+		if chdirErr := os.Chdir(oldWd); chdirErr != nil {
+			t.Logf("Failed to restore working directory: %v", chdirErr)
+		}
+	}()
+	require.NoError(t, os.Chdir(tmpDir))
 
 	resolver := NewGlobResolver()
 
@@ -110,7 +114,7 @@ func TestExplicitResolver(t *testing.T) {
 
 	// Create test file
 	testFile := filepath.Join(tmpDir, "main.cpp")
-	err = os.WriteFile(testFile, []byte("test content"), 0644)
+	err = os.WriteFile(testFile, []byte("test content"), 0600)
 	require.NoError(t, err)
 
 	resolver := NewExplicitResolver()
@@ -128,7 +132,7 @@ func TestExplicitResolver(t *testing.T) {
 	t.Run("multiple explicit files", func(t *testing.T) {
 		// Create another file
 		testFile2 := filepath.Join(tmpDir, "utils.cpp")
-		err := os.WriteFile(testFile2, []byte("test content"), 0644)
+		err := os.WriteFile(testFile2, []byte("test content"), 0600)
 		require.NoError(t, err)
 
 		patterns := []string{testFile, testFile2}
@@ -157,15 +161,19 @@ func TestSmartResolver(t *testing.T) {
 	files := []string{"main.cpp", "utils.cpp", "test.cpp"}
 	for _, file := range files {
 		path := filepath.Join(tmpDir, file)
-		err := os.WriteFile(path, []byte("test content"), 0644)
-		require.NoError(t, err)
+		writeErr := os.WriteFile(path, []byte("test content"), 0600)
+		require.NoError(t, writeErr)
 	}
 
 	// Change to temp directory
 	oldWd, err := os.Getwd()
 	require.NoError(t, err)
-	defer os.Chdir(oldWd)
-	os.Chdir(tmpDir)
+	defer func() {
+		if chdirErr := os.Chdir(oldWd); chdirErr != nil {
+			t.Logf("Failed to restore working directory: %v", chdirErr)
+		}
+	}()
+	require.NoError(t, os.Chdir(tmpDir))
 
 	resolver := NewSmartResolver()
 

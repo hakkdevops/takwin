@@ -83,7 +83,8 @@ func (c *Config) Validate() error {
 		return fmt.Errorf("at least one target must be defined")
 	}
 
-	for i, target := range c.Targets {
+	for i := range c.Targets {
+		target := &c.Targets[i]
 		if target.Name == "" {
 			return fmt.Errorf("target %d: name is required", i)
 		}
@@ -123,9 +124,9 @@ func (c *Config) GetDefaultTarget() *Target {
 
 // GetTarget returns a target by name or nil if not found
 func (c *Config) GetTarget(name string) *Target {
-	for _, target := range c.Targets {
-		if target.Name == name {
-			return &target
+	for i := range c.Targets {
+		if c.Targets[i].Name == name {
+			return &c.Targets[i]
 		}
 	}
 	return nil

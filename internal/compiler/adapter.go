@@ -14,6 +14,8 @@ const (
 )
 
 // Context contains all information needed for compilation
+//
+//nolint:govet // fieldalignment: 8 bytes savings not worth readability loss
 type Context struct {
 	Sources      []string
 	Output       string

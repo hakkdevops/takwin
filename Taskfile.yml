@@ -92,8 +92,26 @@ tasks:
 
   # Pre-push workflow
   pre-push:
-    desc: Pre-push checks
-    deps: [fmt, test, build, examples, examples-complex]
+    desc: Pre-push checks (runs same checks as CI)
+    cmds:
+      - task: fmt
+      - task: vet
+      - task: lint
+      - task: test-race
+      - task: build
+      - powershell -c "Write-Host '✅ All pre-push checks passed!'"
+
+  # CI simulation
+  ci-local:
+    desc: Run full CI pipeline locally
+    cmds:
+      - powershell -c "Write-Host '🔍 Running lint...'"
+      - task: lint
+      - powershell -c "Write-Host '🧪 Running tests...'"
+      - task: test-race
+      - powershell -c "Write-Host '🔨 Building...'"
+      - task: build
+      - powershell -c "Write-Host '✅ CI pipeline completed successfully!'"
 
   # Documentation tasks
   docs-install:

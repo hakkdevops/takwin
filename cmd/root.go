@@ -29,6 +29,7 @@ func Execute() error {
 	return rootCmd.Execute()
 }
 
+//nolint:gochecknoinits // init required for cobra command initialization
 func init() {
 	cobra.OnInitialize(initConfig)
 
@@ -37,7 +38,9 @@ func init() {
 	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 
 	// Bind flags to viper
-	viper.BindPFlag("verbose", rootCmd.PersistentFlags().Lookup("verbose"))
+	if err := viper.BindPFlag("verbose", rootCmd.PersistentFlags().Lookup("verbose")); err != nil {
+		fmt.Fprintf(os.Stderr, "Error binding flag: %v\n", err)
+	}
 }
 
 // initConfig reads in config file and ENV variables if set.

@@ -2,15 +2,18 @@ run:
   timeout: 5m
   issues-exit-code: 1
   tests: true
-  skip-dirs:
+
+output:
+  formats:
+    - format: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true
+
+issues:
+  exclude-dirs:
     - vendor
     - dist
     - examples/*/build
-
-output:
-  format: colored-line-number
-  print-issued-lines: true
-  print-linter-name: true
 
 linters-settings:
   errcheck:
@@ -18,7 +21,6 @@ linters-settings:
     check-blank: true
   
   govet:
-    check-shadowing: true
     enable-all: true
   
   gocyclo:
@@ -64,10 +66,14 @@ linters-settings:
   nestif:
     min-complexity: 4
   
-  gomnd:
-    settings:
-      mnd:
-        checks: argument,case,condition,operation,return,assign
+  mnd:
+    checks:
+      - argument
+      - case
+      - condition
+      - operation
+      - return
+      - assign
   
   godox:
     keywords:
@@ -86,12 +92,10 @@ linters:
   disable-all: true
   enable:
     - bodyclose
-    - deadcode
-    - depguard
+    - copyloopvar
     - dogsled
     - dupl
     - errcheck
-    - exportloopref
     - exhaustive
     - funlen
     - gochecknoinits
@@ -99,8 +103,7 @@ linters:
     - gocritic
     - gocyclo
     - gofmt
-    - goimports
-    - gomnd
+    - mnd
     - goprintffuncname
     - gosec
     - gosimple
@@ -113,26 +116,23 @@ linters:
     - nolintlint
     - rowserrcheck
     - staticcheck
-    - structcheck
     - stylecheck
     - typecheck
     - unconvert
     - unparam
     - unused
-    - varcheck
     - whitespace
 
-issues:
   exclude-rules:
     - path: _test\.go
       linters:
-        - gomnd
+        - mnd
         - funlen
         - gocyclo
     
     - path: examples/
       linters:
-        - gomnd
+        - mnd
         - goconst
     
     - path: cmd/

@@ -44,6 +44,7 @@ var listCmd = &cobra.Command{
 	},
 }
 
+//nolint:gochecknoinits // init required for cobra command registration
 func init() {
 	rootCmd.AddCommand(listCmd)
 }

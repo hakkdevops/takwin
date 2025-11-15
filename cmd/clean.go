@@ -28,22 +28,26 @@ var cleanCmd = &cobra.Command{
 		}
 
 		// Check if directory exists
-		if _, err := os.Stat(outputDir); os.IsNotExist(err) {
+		if _, statErr := os.Stat(outputDir); os.IsNotExist(statErr) {
 			fmt.Printf("Build directory '%s' does not exist\n", outputDir)
 			return nil
 		}
 
 		// Remove the directory
-		if err := os.RemoveAll(outputDir); err != nil {
-			return fmt.Errorf("failed to remove build directory: %w", err)
+		if removeErr := os.RemoveAll(outputDir); removeErr != nil {
+			return fmt.Errorf("failed to remove build directory: %w", removeErr)
 		}
 
-		absPath, _ := filepath.Abs(outputDir)
+		absPath, err := filepath.Abs(outputDir)
+		if err != nil {
+			absPath = outputDir
+		}
 		fmt.Printf("Cleaned build directory: %s\n", absPath)
 		return nil
 	},
 }
 
+//nolint:gochecknoinits // init required for cobra command registration
 func init() {
 	rootCmd.AddCommand(cleanCmd)
 }

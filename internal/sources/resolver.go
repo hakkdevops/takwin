@@ -9,7 +9,7 @@ import (
 
 // Resolver interface for resolving source file patterns
 type Resolver interface {
-	Resolve(patterns []string, excludePatterns []string) ([]string, error)
+	Resolve(patterns, excludePatterns []string) ([]string, error)
 }
 
 // GlobResolver resolves source files using glob patterns
@@ -19,7 +19,7 @@ func NewGlobResolver() *GlobResolver {
 	return &GlobResolver{}
 }
 
-func (g *GlobResolver) Resolve(patterns []string, excludePatterns []string) ([]string, error) {
+func (g *GlobResolver) Resolve(patterns, excludePatterns []string) ([]string, error) {
 	var allFiles []string
 	seen := make(map[string]bool)
 
@@ -76,7 +76,7 @@ func NewExplicitResolver() *ExplicitResolver {
 	return &ExplicitResolver{}
 }
 
-func (e *ExplicitResolver) Resolve(patterns []string, excludePatterns []string) ([]string, error) {
+func (e *ExplicitResolver) Resolve(patterns, excludePatterns []string) ([]string, error) {
 	var allFiles []string
 	seen := make(map[string]bool)
 
@@ -114,7 +114,7 @@ func NewSmartResolver() *SmartResolver {
 	}
 }
 
-func (s *SmartResolver) Resolve(patterns []string, excludePatterns []string) ([]string, error) {
+func (s *SmartResolver) Resolve(patterns, excludePatterns []string) ([]string, error) {
 	var globPatterns []string
 	var explicitFiles []string
 

@@ -38,6 +38,7 @@ If no target is specified, builds the default target.`,
 	},
 }
 
+//nolint:gochecknoinits // init required for cobra command registration
 func init() {
 	rootCmd.AddCommand(buildCmd)
 

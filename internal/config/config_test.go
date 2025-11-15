@@ -48,6 +48,7 @@ sources = ["main.cpp"]
 }
 
 func TestValidate(t *testing.T) {
+	//nolint:govet // fieldalignment: 8 bytes savings not worth readability loss in test
 	tests := []struct {
 		name    string
 		config  Config
