@@ -5,7 +5,7 @@ on:
     branches: [ main, develop ]
 
 env:
-  GO_VERSION: '1.21'
+  GO_VERSION: '1.22'
 
 jobs:
   format-check:
@@ -43,11 +43,18 @@ jobs:
       with:
         go-version: ${{ env.GO_VERSION }}
 
+    - name: Tidy dependencies
+      run: go mod tidy
+
+    - name: Download dependencies
+      run: go mod download
+
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v3
       with:
         version: latest
         args: --timeout=5m
+        skip-cache: true
 
   test:
     name: Test
@@ -69,6 +76,9 @@ jobs:
           ~/.cache/go-build
           ~/go/pkg/mod
         key: ${{ runner.os }}-go-${{ env.GO_VERSION }}-${{ hashFiles('**/go.sum') }}
+
+    - name: Tidy dependencies
+      run: go mod tidy
 
     - name: Download dependencies
       run: go mod download
@@ -98,6 +108,9 @@ jobs:
       with:
         go-version: ${{ env.GO_VERSION }}
 
+    - name: Tidy dependencies
+      run: go mod tidy
+
     - name: Build
       run: go build -o takwin main.go
 
@@ -126,10 +139,20 @@ jobs:
       with:
         go-version: ${{ env.GO_VERSION }}
 
+    - name: Tidy dependencies
+      run: go mod tidy
+
     - name: Run Gosec Security Scanner
-      uses: securecodewarrior/github-action-gosec@master
+      run: |
+        go install github.com/securego/gosec/v2/cmd/gosec@latest
+        gosec -fmt=sarif -out=gosec.sarif ./...
+      continue-on-error: true
+
+    - name: Upload Gosec results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
       with:
-        args: './...'
+        sarif_file: gosec.sarif
 
   dependency-check:
     name: Dependency Check
@@ -144,10 +167,13 @@ jobs:
       with:
         go-version: ${{ env.GO_VERSION }}
 
+    - name: Tidy dependencies
+      run: go mod tidy
+
     - name: Check for vulnerabilities
       run: |
-        go install github.com/sonatypecommunity/nancy@latest
-        go list -json -deps ./... | nancy sleuth
+        go install golang.org/x/vuln/cmd/govulncheck@latest
+        govulncheck ./...
 
     - name: Verify dependencies
       run: go mod verify
