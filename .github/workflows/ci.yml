@@ -169,11 +169,18 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: choco install mingw -y
 
-    - name: Test simple example (Linux/macOS)
-      if: runner.os != 'Windows'
+    - name: Test simple example (Linux)
+      if: runner.os == 'Linux'
       run: |
         cd examples/simple
-        ../../dist/takwin-*-amd64 build
+        ../../dist/takwin-linux-amd64 build
+        ls -la build/bin/
+
+    - name: Test simple example (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        cd examples/simple
+        ../../dist/takwin-darwin-arm64 build
         ls -la build/bin/
 
     - name: Test simple example (Windows)
@@ -183,12 +190,19 @@ jobs:
         ../../dist/takwin-windows-amd64.exe build
         dir build\bin\
 
-    - name: Test complex example (Linux/macOS)
-      if: runner.os != 'Windows'
+    - name: Test complex example (Linux)
+      if: runner.os == 'Linux'
       run: |
         cd examples/complex
-        ../../dist/takwin-*-amd64 build -t mathlib
-        ../../dist/takwin-*-amd64 build -t calculator
+        ../../dist/takwin-linux-amd64 build -t mathlib
+        ../../dist/takwin-linux-amd64 build -t calculator
+
+    - name: Test complex example (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        cd examples/complex
+        ../../dist/takwin-darwin-arm64 build -t mathlib
+        ../../dist/takwin-darwin-arm64 build -t calculator
 
     - name: Test complex example (Windows)
       if: runner.os == 'Windows'
