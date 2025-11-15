@@ -25,25 +25,46 @@
   --md-accent-fg-color--transparent: rgba(0, 228, 255, 0.1);
 }
 
-/* White header with gradient bottom border */
+/* Unified header and tabs - light gray background for logo contrast */
 .md-header {
-  background: white !important;
-  border-bottom: 4px solid;
-  border-image: linear-gradient(90deg, var(--takwin-gradient-start) 0%, var(--takwin-gradient-end) 100%) 1;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #F5F5F5 !important;
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+  border-bottom: none;
 }
 
-/* Header title and navigation text color */
+/* Merge tabs into header */
+.md-tabs {
+  background: transparent !important;
+  border-bottom: 3px solid;
+  border-image: linear-gradient(90deg, var(--takwin-gradient-start) 0%, var(--takwin-gradient-end) 100%) 1;
+}
+
+/* Header and tabs text color */
 .md-header__title,
 .md-header__button,
-.md-header .md-search__input::placeholder {
+.md-header .md-search__input::placeholder,
+.md-tabs__link {
   color: var(--takwin-deep-blue) !important;
 }
 
-/* Logo - larger and more visible */
+/* Tabs styling */
+.md-tabs__link {
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  opacity: 1;
+  color: var(--takwin-blue) !important;
+  border-bottom: 2px solid var(--takwin-cyan);
+}
+
+/* Logo - much larger and prominent */
 .md-header__button.md-logo,
 .md-logo {
-  padding: 2px;
+  padding: 4px;
+  margin-right: 8px;
 }
 
 .md-header__button.md-logo img,
@@ -51,25 +72,20 @@
 .md-logo img,
 .md-logo svg {
   display: block;
-  width: 48px;
-  height: 48px;
-  max-width: none;
+  width: 64px !important;
+  height: 64px !important;
+  max-width: none !important;
+  max-height: none !important;
 }
 
-/* Tabs with gradient background */
-.md-tabs {
-  background: linear-gradient(135deg, var(--takwin-gradient-start) 0%, var(--takwin-gradient-end) 100%);
+/* Search bar styling */
+.md-search__input {
+  background-color: white;
+  border: 1px solid rgba(0, 152, 249, 0.2);
 }
 
-.md-tabs__link {
-  color: white !important;
-  opacity: 0.8;
-}
-
-.md-tabs__link--active,
-.md-tabs__link:hover {
-  opacity: 1;
-  color: white !important;
+.md-search__input:focus {
+  border-color: var(--takwin-blue);
 }
 
 /* Links with brand color */
