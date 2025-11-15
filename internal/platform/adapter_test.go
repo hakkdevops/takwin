@@ -34,11 +34,7 @@ func TestWindowsAdapter(t *testing.T) {
 	assert.Equal(t, ".obj", adapter.ObjectFileExtension())
 	assert.Equal(t, "\\", adapter.PathSeparator())
 
-	// Test AddExtension
-	assert.Equal(t, "program.exe", adapter.AddExtension("program", "executable"))
-	assert.Equal(t, "libmath.lib", adapter.AddExtension("libmath", "static_library"))
-	assert.Equal(t, "shared.dll", adapter.AddExtension("shared", "shared_library"))
-	assert.Equal(t, "unknown", adapter.AddExtension("unknown", "unknown_type"))
+	testAddExtension(t, adapter, "program.exe", "libmath.lib", "shared.dll")
 
 	// Test with existing extension
 	assert.Equal(t, "program.exe", adapter.AddExtension("program.exe", "executable"))
@@ -53,14 +49,18 @@ func TestUnixAdapter(t *testing.T) {
 	assert.Equal(t, ".o", adapter.ObjectFileExtension())
 	assert.Equal(t, "/", adapter.PathSeparator())
 
-	// Test AddExtension
-	assert.Equal(t, "program", adapter.AddExtension("program", "executable"))
-	assert.Equal(t, "libmath.a", adapter.AddExtension("math", "static_library"))
-	assert.Equal(t, "libshared.so", adapter.AddExtension("shared", "shared_library"))
-	assert.Equal(t, "unknown", adapter.AddExtension("unknown", "unknown_type"))
+	testAddExtension(t, adapter, "program", "libmath.a", "libshared.so")
 
 	// Test with existing lib prefix
 	assert.Equal(t, "libmath.a", adapter.AddExtension("libmath", "static_library"))
+}
+
+func testAddExtension(t *testing.T, adapter Adapter, expectedExe, expectedLib, expectedShared string) {
+	t.Helper()
+	assert.Equal(t, expectedExe, adapter.AddExtension("program", "executable"))
+	assert.Equal(t, expectedLib, adapter.AddExtension("math", "static_library"))
+	assert.Equal(t, expectedShared, adapter.AddExtension("shared", "shared_library"))
+	assert.Equal(t, "unknown", adapter.AddExtension("unknown", "unknown_type"))
 }
 
 func TestMacOSAdapter(t *testing.T) {

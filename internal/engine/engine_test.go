@@ -228,6 +228,7 @@ func TestGetOutputDir(t *testing.T) {
 
 	engine := NewEngine(cfg)
 
+	//nolint:govet // fieldalignment: minor optimization not worth readability loss in test
 	tests := []struct {
 		name     string
 		target   config.Target
